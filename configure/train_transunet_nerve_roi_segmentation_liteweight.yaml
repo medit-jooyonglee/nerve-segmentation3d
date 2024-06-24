@@ -1,0 +1,226 @@
+model:
+  # detection model
+  detection: 3DUnet_multiclass/test_nerve_roi_detection.yaml
+  # 2 stage model. dectection feature concat as input
+  detection_concat: true
+  # model class, e.g. UNet3D, ResidualUNet3D
+  name: VisionTransformerInterpolatorV2
+  parallel: false
+  # number of input channels to the model
+  activation: softmax
+  final_activation: sigmoid
+  classifier: seg
+  decoder_channels:
+  - 128
+  - 64
+  - 32
+  - 16
+  hidden_size: 192
+  img_size: 128
+  in_channels: 2
+  n_classes: 2
+  n_skip: 3
+  patch_size: 16
+  patches:
+    grid:
+    - 16
+    - 6
+    - 6
+    size:
+    - 16
+    - 16
+  pretrained_path: ../model/vit_checkpoint/imagenet21k/R50+ViT-B_16.npz
+  representation_size: null
+  resnet:
+    num_layers:
+    - 3
+    - 4
+    - 9
+    width_factor: 1
+  resnet_pretrained_path: null
+  # in case of width factor 1
+#  skip_channels:
+#  - 128
+#  - 64
+#  - 16
+#  - 0
+  skip_channels:
+    - 128
+    - 64
+    - 16
+    - 0
+  transformer:
+    attention_dropout_rate: 0.0
+    dropout_rate: 0.1
+    mlp_dim: 512
+    num_heads: 8
+    num_layers: 6
+
+# trainer configuration
+trainer:
+  # path to the checkpoint directory
+  checkpoint_dir: CHECKPOINT_DIR/nerve_roi_vit_segmentation_liteweight
+  # path to the latest checkpoint; if provided the training will be resumed from that checkpoint, if bool type, find best checkpoints in checkpoint_dir
+  resume: true
+  # loss using weights mask
+  number_of_target: 1
+  # path to the best_checkpoint.pytorch; to be used for fine-tuning the model with additional ground truth
+  # make sure to decrease the learning rate in the optimizer config accordingly
+  pre_trained: null
+  # how many iterations between validations
+  validate_after_iters: 1000
+  # how many iterations between tensorboard logging
+  log_after_iters: 500
+  # max number of epochs
+  max_num_epochs: 200
+  # max number of iterations
+  max_num_iterations: 100000
+  # model with higher eval score is considered better
+  eval_score_higher_is_better: True
+
+  skip_train_validation: True
+# loss function configuration
+loss:
+  # use BCE loss for training
+  name: BCEDiceLoss
+# optimizer configuration
+optimizer:
+  # initial learning rate
+  learning_rate: 0.0005
+  # weight decay
+  weight_decay: 0.00001
+# evaluation metric
+eval_metric:
+  # use average precision metric
+  name: MeanIoU
+  # multiple option
+  multiple : true
+  # if multiple metric, defined names
+  names : [DSC, PPV, SEN]
+# learning rate scheduler configuration
+lr_scheduler:
+  # reduce learning rate when evaluation metric plateaus
+  name: ReduceLROnPlateau
+  # use 'max' if eval_score_higher_is_better=True, 'min' otherwise
+  mode: max
+  # factor by which learning rate will be reduced
+  factor: 0.2
+  # number of *validation runs* with no improvement after which learning rate will be reduced
+  patience: 8
+
+# data loaders configuration
+loaders:
+  # class of the HDF5 dataset, currently StandardHDF5Dataset and LazyHDF5Dataset are supported.
+  # When using LazyHDF5Dataset make sure to set `num_workers = 1`, due to a bug in h5py which corrupts the data
+  # when reading from multiple threads.
+  dataset: BBoxDataset
+  # detection & segmentation 2 stage 모델일 경우, 2stage 학습데이터 로딩시 1stage의 feature을 concat할지 옵션 유무
+  concat_feature: true
+  # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel
+  batch_size: 1
+  # how many subprocesses to use for data loading
+  num_workers: 0
+  # path to the raw data within the H5
+  raw_internal_path: raw
+  # path to the label data within the H5
+  label_internal_path: label
+  # path to the pixel-wise weight map withing the H5 if present
+  weight_internal_path: null
+  # edge dataset in case of edge-dataset
+  edge_type: upper_lower
+  # configuration of the train loader
+  train:
+    # paths to the training datasets
+    file_paths:
+      [
+        [
+          c:/dataset/nerve_dataset/reluapp/source,
+          c:/dataset/nerve_dataset/reluapp/gt,
+        ],
+        [
+          c:/dataset/nerve_dataset/AutoPlanning(Nerve_Seg)/source,
+          c:/dataset/nerve_dataset/AutoPlanning(Nerve_Seg)/ground_truth,
+        ],
+#              [
+#                D:/dataset/AutoPlanning(Nerve_Seg)/convert/source,
+#                D:/dataset/AutoPlanning(Nerve_Seg)/convert/ground_truth,
+#              ],
+        [
+          D:/dataset/reluapp/source,
+          D:/dataset/reluapp/gt,
+        ],
+      ]
+
+    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+    slice_builder:
+      name: FilterSliceBuilder
+      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+      patch_shape: [ 80, 170, 170 ]
+      # train stride between patches
+      stride_shape: [ 20, 40, 40 ]
+      # minimum volume of the labels in the patch
+      threshold: 0.01
+      # probability of accepting patches which do not fulfil the threshold criterion
+      slack_acceptance: 0.01
+
+    transformer:
+      raw:
+        # subtract mean and divide by std dev
+        - name: Standardize
+        # randomly flips the volume in one of the axis
+        - name: RandomFlip
+        # randomly rotates the volume with 90 deg across a randomly chosen plane
+        - name: RandomRotate90
+        - name: RandomRotate
+          # rotate only in ZY plane due to anisotropy
+          axes: [ [ 2, 1 ] ]
+          # rotates by choosing random angle from [-30, 30] deg
+          angle_spectrum: 30
+          mode: reflect
+        - name: ElasticDeformation
+          spline_order: 3
+        - name: ToTensor
+          expand_dims: true
+      label:
+        - name: RandomFlip
+        - name: RandomRotate90
+        - name: RandomRotate
+          # rotate only in ZY plane due to anisotropy
+          axes: [ [ 2, 1 ] ]
+          angle_spectrum: 30
+          mode: reflect
+        - name: ElasticDeformation
+          spline_order: 0
+          # convert target volume to binary mask
+        - name: ToTensor
+          expand_dims: false
+          dtype: long
+
+  # configuration of the val loader
+#  val:
+#    # paths to the val datasets
+#    file_paths:
+#      - C:/dataset/ct_segmentation_2class_with_marker
+#
+#    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+#    slice_builder:
+#      name: FilterSliceBuilder
+#      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+#      patch_shape: [ 80, 170, 170 ]
+#      # train stride between patches
+#      stride_shape: [ 80, 170, 170 ]
+#      # minimum volume of the labels in the patch
+#      threshold: 0.01
+#      # probability of accepting patches which do not fulfil the threshold criterion
+#      slack_acceptance: 0.01
+#
+#    # data augmentation
+#    transformer:
+#      raw:
+#        - name: Standardize
+#        - name: ToTensor
+#          expand_dims: true
+#      label:
+#        - name: ToTensor
+#          expand_dims: false
+#          dtype: long

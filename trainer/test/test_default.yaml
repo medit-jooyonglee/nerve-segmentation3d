@@ -1,0 +1,23 @@
+device: cuda:0
+loaders:
+  batch_size: 2
+  dataset: TestDataset
+  train:
+    file_paths: []
+  valid:
+    file_paths: []
+loss:
+  name: TestLoss
+metrics:
+  name:
+  - TestMetrics
+  testmet: !!set
+    param: null
+model:
+  name: TestModel
+trainer:
+  checkpoint_dir: temp
+  lr_scheduler: {}
+  mlflow_path: http://10.100.1.45:5000
+  optimizer:
+    name: ''

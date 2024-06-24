@@ -1,0 +1,224 @@
+2024-06-19 10:14:19,908 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:14:19,933 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:16:49,908 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:16:49,932 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:17:30,919 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:17:30,950 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:18:46,185 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:18:46,224 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:40:36,871 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:40:36,895 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:40:55,133 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:40:55,157 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:43:13,294 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.8630084991455078 secons[0m
+2024-06-19 10:43:14,767 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 1.009274959564209 secons[0m
+2024-06-19 10:43:14,966 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.12256360054016113 secons[0m
+2024-06-19 10:43:14,973 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 10:43:15,989 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.993696928024292 secons[0m
+2024-06-19 10:43:16,175 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.03459477424621582 secons[0m
+2024-06-19 10:43:16,365 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10381889343261719 secons[0m
+2024-06-19 10:43:16,373 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 10:43:17,514 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1229000091552734 secons[0m
+2024-06-19 10:43:17,556 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 5.176506042480469 secons[0m
+2024-06-19 10:44:13,997 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.16105246543884277 secons[0m
+2024-06-19 10:46:55,960 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.25464653968811035 secons[0m
+2024-06-19 10:46:56,155 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11896538734436035 secons[0m
+2024-06-19 10:46:56,161 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 10:46:57,194 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9930384159088135 secons[0m
+2024-06-19 10:46:57,369 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.02352762222290039 secons[0m
+2024-06-19 10:46:57,581 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11155939102172852 secons[0m
+2024-06-19 10:46:57,589 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 10:46:58,768 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.140310525894165 secons[0m
+2024-06-19 10:48:51,361 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 10:48:51,387 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 10:48:56,335 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.5212795734405518 secons[0m
+2024-06-19 11:20:55,816 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 1.1561646461486816 secons[0m
+2024-06-19 11:21:13,753 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11775016784667969 secons[0m
+2024-06-19 11:21:13,760 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 11:21:26,380 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.00392746925354 secons[0m
+2024-06-19 11:22:34,505 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.059090614318847656 secons[0m
+2024-06-19 11:22:34,687 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10513067245483398 secons[0m
+2024-06-19 11:22:34,693 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 11:22:35,883 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1501059532165527 secons[0m
+2024-06-19 11:23:11,931 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 2054.589236974716 secons[0m
+2024-06-19 11:23:45,519 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 11:23:45,552 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 11:23:58,190 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.8910107612609863 secons[0m
+2024-06-19 11:24:07,857 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 1.410599708557129 secons[0m
+2024-06-19 11:24:09,510 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11777186393737793 secons[0m
+2024-06-19 11:24:09,517 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 11:24:10,551 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9920933246612549 secons[0m
+2024-06-19 11:24:10,794 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.10858273506164551 secons[0m
+2024-06-19 11:24:13,235 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10032153129577637 secons[0m
+2024-06-19 11:24:13,242 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 11:24:14,410 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1255528926849365 secons[0m
+2024-06-19 15:04:13,509 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 15:04:13,535 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 15:07:53,510 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 15:07:53,517 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 15:08:03,346 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.8737390041351318 secons[0m
+2024-06-19 15:08:04,901 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 1.0920796394348145 secons[0m
+2024-06-19 15:08:05,112 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.12455511093139648 secons[0m
+2024-06-19 15:08:05,120 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:08:06,179 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0364139080047607 secons[0m
+2024-06-19 15:08:06,361 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.03991055488586426 secons[0m
+2024-06-19 15:08:06,565 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.1091318130493164 secons[0m
+2024-06-19 15:08:06,572 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:08:07,786 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1964304447174072 secons[0m
+2024-06-19 15:08:07,824 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 5.428112506866455 secons[0m
+2024-06-19 15:08:51,386 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.2238311767578125 secons[0m
+2024-06-19 15:08:51,998 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.039179086685180664 secons[0m
+2024-06-19 15:08:52,197 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11344075202941895 secons[0m
+2024-06-19 15:08:52,203 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:08:53,365 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.144590139389038 secons[0m
+2024-06-19 15:08:53,563 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.04897665977478027 secons[0m
+2024-06-19 15:08:53,757 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10837483406066895 secons[0m
+2024-06-19 15:08:53,764 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:08:55,094 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.3115904331207275 secons[0m
+2024-06-19 15:08:55,143 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 4.056897163391113 secons[0m
+2024-06-19 15:09:22,963 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.21557307243347168 secons[0m
+2024-06-19 15:09:23,462 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.020529747009277344 secons[0m
+2024-06-19 15:09:23,679 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11794757843017578 secons[0m
+2024-06-19 15:09:23,685 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:09:24,788 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0860040187835693 secons[0m
+2024-06-19 15:09:24,980 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.047257184982299805 secons[0m
+2024-06-19 15:09:25,169 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10919904708862305 secons[0m
+2024-06-19 15:09:25,175 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:09:26,441 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.2489347457885742 secons[0m
+2024-06-19 15:09:26,481 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.805100679397583 secons[0m
+2024-06-19 15:09:52,033 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.09862732887268066 secons[0m
+2024-06-19 15:09:52,638 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.061238765716552734 secons[0m
+2024-06-19 15:09:52,833 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11367106437683105 secons[0m
+2024-06-19 15:09:52,840 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:09:53,946 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0876920223236084 secons[0m
+2024-06-19 15:09:54,284 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.19037485122680664 secons[0m
+2024-06-19 15:09:54,461 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10167193412780762 secons[0m
+2024-06-19 15:09:54,469 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:09:55,712 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.2258737087249756 secons[0m
+2024-06-19 15:09:55,754 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.8951594829559326 secons[0m
+2024-06-19 15:10:13,674 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.2910177707672119 secons[0m
+2024-06-19 15:10:14,152 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.02406787872314453 secons[0m
+2024-06-19 15:10:14,366 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11483955383300781 secons[0m
+2024-06-19 15:10:14,373 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:15,412 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0222415924072266 secons[0m
+2024-06-19 15:10:15,602 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.04517364501953125 secons[0m
+2024-06-19 15:10:15,788 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10210514068603516 secons[0m
+2024-06-19 15:10:15,794 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:16,978 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1666574478149414 secons[0m
+2024-06-19 15:10:17,023 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.730586051940918 secons[0m
+2024-06-19 15:10:30,813 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.2407984733581543 secons[0m
+2024-06-19 15:10:31,424 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.125518798828125 secons[0m
+2024-06-19 15:10:31,616 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11557722091674805 secons[0m
+2024-06-19 15:10:31,623 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:32,644 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0032179355621338 secons[0m
+2024-06-19 15:10:32,816 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.030319690704345703 secons[0m
+2024-06-19 15:10:33,008 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.09892821311950684 secons[0m
+2024-06-19 15:10:33,014 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:34,205 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.172619342803955 secons[0m
+2024-06-19 15:10:34,244 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.727687358856201 secons[0m
+2024-06-19 15:10:52,068 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.10785222053527832 secons[0m
+2024-06-19 15:10:52,721 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.08552932739257812 secons[0m
+2024-06-19 15:10:52,913 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11580848693847656 secons[0m
+2024-06-19 15:10:52,919 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:53,940 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.004591941833496 secons[0m
+2024-06-19 15:10:54,287 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.20509123802185059 secons[0m
+2024-06-19 15:10:54,466 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10250377655029297 secons[0m
+2024-06-19 15:10:54,473 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:10:55,645 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.155125617980957 secons[0m
+2024-06-19 15:10:55,683 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.7861061096191406 secons[0m
+2024-06-19 15:11:21,202 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.10102081298828125 secons[0m
+2024-06-19 15:11:21,832 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.06558656692504883 secons[0m
+2024-06-19 15:11:22,019 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11141443252563477 secons[0m
+2024-06-19 15:11:22,025 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:11:23,032 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9906103610992432 secons[0m
+2024-06-19 15:11:23,372 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.19256114959716797 secons[0m
+2024-06-19 15:11:23,552 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10265088081359863 secons[0m
+2024-06-19 15:11:23,558 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:11:24,737 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.161125659942627 secons[0m
+2024-06-19 15:11:24,783 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.7485480308532715 secons[0m
+2024-06-19 15:12:02,786 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-19 15:12:02,812 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-19 15:12:09,639 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.5529494285583496 secons[0m
+2024-06-19 15:12:14,862 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 1.331780195236206 secons[0m
+2024-06-19 15:12:15,064 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.12289953231811523 secons[0m
+2024-06-19 15:12:15,073 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:12:16,021 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9087576866149902 secons[0m
+2024-06-19 15:12:16,199 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.03856086730957031 secons[0m
+2024-06-19 15:12:16,404 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11749005317687988 secons[0m
+2024-06-19 15:12:16,411 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:12:17,422 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9647047519683838 secons[0m
+2024-06-19 15:12:20,122 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 11.11435580253601 secons[0m
+2024-06-19 15:12:35,484 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.29749584197998047 secons[0m
+2024-06-19 15:12:36,040 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.03705716133117676 secons[0m
+2024-06-19 15:12:36,243 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10992670059204102 secons[0m
+2024-06-19 15:12:36,253 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:12:37,369 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0747666358947754 secons[0m
+2024-06-19 15:12:37,586 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.0507044792175293 secons[0m
+2024-06-19 15:12:37,789 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11601400375366211 secons[0m
+2024-06-19 15:12:37,796 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:12:38,828 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.9936263561248779 secons[0m
+2024-06-19 15:12:38,870 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.7557373046875 secons[0m
+2024-06-19 15:12:56,697 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.13661742210388184 secons[0m
+2024-06-19 15:12:57,426 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.11945104598999023 secons[0m
+2024-06-19 15:12:57,616 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11195588111877441 secons[0m
+2024-06-19 15:12:57,624 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:12:58,970 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.3027873039245605 secons[0m
+2024-06-19 15:12:59,320 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.18686652183532715 secons[0m
+2024-06-19 15:12:59,467 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.07317519187927246 secons[0m
+2024-06-19 15:12:59,471 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:13:00,829 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.3359730243682861 secons[0m
+2024-06-19 15:13:00,872 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 4.3729248046875 secons[0m
+2024-06-19 15:13:21,327 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.09960246086120605 secons[0m
+2024-06-19 15:13:21,887 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.07550239562988281 secons[0m
+2024-06-19 15:13:22,066 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10682177543640137 secons[0m
+2024-06-19 15:13:22,074 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:13:23,204 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0907349586486816 secons[0m
+2024-06-19 15:13:23,558 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.20876717567443848 secons[0m
+2024-06-19 15:13:23,739 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10863256454467773 secons[0m
+2024-06-19 15:13:23,746 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:13:25,078 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.2879202365875244 secons[0m
+2024-06-19 15:13:25,117 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.967237949371338 secons[0m
+2024-06-19 15:13:44,127 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.0840139389038086 secons[0m
+2024-06-19 15:13:44,780 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.0639336109161377 secons[0m
+2024-06-19 15:13:44,968 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11332893371582031 secons[0m
+2024-06-19 15:13:44,976 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:13:46,160 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1399939060211182 secons[0m
+2024-06-19 15:13:46,501 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.19417047500610352 secons[0m
+2024-06-19 15:13:46,679 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.10276222229003906 secons[0m
+2024-06-19 15:13:46,686 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:13:47,635 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.8991153240203857 secons[0m
+2024-06-19 15:13:47,667 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.6934337615966797 secons[0m
+2024-06-19 15:14:14,197 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.30808591842651367 secons[0m
+2024-06-19 15:14:14,696 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.023026704788208008 secons[0m
+2024-06-19 15:14:14,884 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.1045684814453125 secons[0m
+2024-06-19 15:14:14,900 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:14:16,047 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1047844886779785 secons[0m
+2024-06-19 15:14:16,250 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.048085927963256836 secons[0m
+2024-06-19 15:14:16,463 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11556291580200195 secons[0m
+2024-06-19 15:14:16,470 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:14:17,573 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.0603599548339844 secons[0m
+2024-06-19 15:14:17,607 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.7914512157440186 secons[0m
+2024-06-19 15:25:44,007 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.09303045272827148 secons[0m
+2024-06-19 15:25:44,644 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.06805968284606934 secons[0m
+2024-06-19 15:25:44,842 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11567974090576172 secons[0m
+2024-06-19 15:25:44,851 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:25:45,743 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 0.8491570949554443 secons[0m
+2024-06-19 15:25:46,133 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.obb_vol_segment took 0.20769786834716797 secons[0m
+2024-06-19 15:25:46,325 - AutoPlanning - measure_time - [32mINFO - @timefn: prune_skeleton took 0.11351966857910156 secons[0m
+2024-06-19 15:25:46,332 - AutoPlanning - segmentmask_to_spline - [32mINFO - g_debug_postprocessing...[0m
+2024-06-19 15:25:47,531 - AutoPlanning - measure_time - [32mINFO - @timefn: restored_obb_segment_to_original_grid took 1.1539392471313477 secons[0m
+2024-06-19 15:25:47,568 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 3.7404580116271973 secons[0m
+2024-06-21 16:33:31,468 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-21 16:33:31,493 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-21 16:33:49,868 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-21 16:33:49,897 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-21 16:34:14,613 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-21 16:34:14,638 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-21 16:44:47,665 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-21 16:44:47,691 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-21 16:46:26,355 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\test_nerve_roi_detection.yaml[0m
+2024-06-21 16:46:26,379 - AutoPlanning - load_config - [32mINFO - loading config file:D:\workspace\repositories\nerve-segmentation\models\asset\train_transunet_nerve_roi_segmentation_liteweight.yaml[0m
+2024-06-21 16:46:27,745 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.detection_roi took 0.686720609664917 secons[0m
+2024-06-21 16:46:27,812 - AutoPlanning - full_segment - [31mERROR - no coordinates for detection mask:left[0m
+2024-06-21 16:46:27,816 - AutoPlanning - full_segment - [31mERROR - no coordinates for detection mask:right[0m
+2024-06-21 16:46:27,818 - AutoPlanning - measure_time - [32mINFO - @timefn: ObbSegmentOnnx.full_segment took 0.8243472576141357 secons[0m

@@ -1,0 +1,12 @@
+colorlog
+GPUtil
+ml_collections
+mlflow
+numpy
+opencv-python
+packaging
+PyYAML
+scikit-image
+scikit-learn
+scipy
+torch
