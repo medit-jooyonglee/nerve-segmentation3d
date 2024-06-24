@@ -1,0 +1,2 @@
+from .InterpolateWrapper import InterpolateWrapper, TrilinearInterpolator
+import pyInterpolator
