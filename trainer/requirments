@@ -10,3 +10,6 @@ scikit-image
 scikit-learn
 scipy
 torch
+pydicom
+pylibjpeg
+pylibjpeg-libjpeg

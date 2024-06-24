@@ -1,0 +1,3 @@
+python
+import test
+test.test_dicom_reader

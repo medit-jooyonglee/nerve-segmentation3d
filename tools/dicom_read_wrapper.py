@@ -8,7 +8,19 @@ try:
 except Exception as e:
     print(e.args)
     CVolumeDicomReader = None
+
+import pydicom
 from tools import vtk_utils
+
+
+def read_single_image_array(file):
+    ds = pydicom.read_file(file)
+
+    img = ds.pixel_array
+    dc, dw = float(ds.WindowCenter), float(ds.WindowWidth)
+    a, b = dc - dw / 2, dc + dw / 2
+    res = ((img - a) * (255 / (b - a))).astype(np.uint8)
+    return res
 
 def read_dicom_wrapper(*args, **kwargs):
     """

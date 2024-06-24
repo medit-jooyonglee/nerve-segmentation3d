@@ -1,8 +1,6 @@
-import argparse
 import os
 import numpy as np
 import pytest
-
 import vtk_utils
 import json
 
@@ -63,16 +61,16 @@ def main(args=None):
     import sys
     if args is not None:
         for a in args:
-            sys.argv.append(a)
+            sys.argv.extend(a.split('='))
     parser = argparse.ArgumentParser(description='UNet3D')
     parser.add_argument('--source', default='', type=str, help='source ct directory')
-    # parser.add_argument('-gt', '--gt',  default='', type=str, help='source gt directory')
-    # parser.add_argument('-savedir', '--savedir',  default='', type=str, help='save npy directoreis')
+    parser.add_argument( '--gt',  default='', type=str, help='source gt directory')
+    parser.add_argument( '--savedir',  default='', type=str, help='save npy directoreis')
 
     from trainer import diskmanager
     args = parser.parse_args()
 
-    print(args)
+    # print(args)
 
 
 if __name__ == '__main__':
@@ -81,8 +79,7 @@ if __name__ == '__main__':
     # import pdb; pdb.set_trace()
     pytest.main()
     main([
-        '',
         '--source=d:/temp',
-        # 'gt=d:/temp',
-        # 'savedir=d:/temp/test',
+        '--gt=d:/temp',
+        '--savedir=d:/temp/test',
     ])

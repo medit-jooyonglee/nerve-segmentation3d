@@ -1,6 +1,4 @@
-import SimpleITK
 import pytest
-
 from trainer import get_model, create_trainer, load_config
 
 @pytest.fixture()
