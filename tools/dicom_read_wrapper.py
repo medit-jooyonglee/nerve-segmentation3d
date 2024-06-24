@@ -1,7 +1,7 @@
 # import vtk_utils
 import re
 import numpy as np
-
+import os, glob
 # from tools.meshDicom.meshlibs import CVolumeDicomReader
 try:
     from tools.pymeshlibs import CVolumeDicomReader
@@ -21,6 +21,23 @@ def read_single_image_array(file):
     a, b = dc - dw / 2, dc + dw / 2
     res = ((img - a) * (255 / (b - a))).astype(np.uint8)
     return res
+
+def read_volume_axes(path):
+    # def read_dicom_series(folder_path):
+    dicom_files = glob.glob(os.path.join(path, '*.dcm'))
+    slices = [pydicom.dcmread(file) for file in dicom_files]
+    slices.sort(key=lambda x: float(x.ImagePositionPatient[2]))
+    instance_numbers = [int(slice_instance.InstanceNumber) for slice_instance in slices]
+    volume = np.stack([slice_instance.pixel_array for slice_instance in slices], axis=-1)
+
+    ds
+    ww, wc = ds.WindowWidth, ds.WindowCenter
+    dmin = int(wc) - int(ww) / 2
+    dmax = int(wc) + int(ww) / 2
+
+    return volume, instance_numbers
+
+
 
 def read_dicom_wrapper(*args, **kwargs):
     """

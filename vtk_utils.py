@@ -1,4 +1,6 @@
 import logging
+import sys
+
 import numpy as np
 import re
 import matplotlib.pyplot as plt
@@ -1931,6 +1933,10 @@ def show_actors(actors, keypress_callback=None, in_window_size=None, show=True, 
 
         iren = vtk.vtkRenderWindowInteractor()
         iren.SetRenderWindow(renWin)
+
+        if sys.platform == 'linux':
+            # https://discourse.vtk.org/t/seg-faults-on-render-call/9803/6
+            iren.GetRenderWindow().SetDisplayId("_0_p_void")
 
         if image_save:
             capture_image_from_render_window(renWin, iren,

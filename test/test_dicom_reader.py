@@ -1,11 +1,14 @@
 import os
 import sys
 
+import pydicom.filereader
+
+
 def handle_base_path():
     sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 
 handle_base_path()
-
+    # pydicom.dcmread()
 from tools import dicom_read_wrapper
 
 
@@ -17,10 +20,14 @@ def test_read_single_image_dicom():
     print('loading complete', image_array.shape)
 # image = dicom_read_wrapper.read_dicom_wrapper()
 
+def test_read_volume():
+    import pydicom
+    pydicom.dcmread('D:/dataset/ai_hub_labels/CTDATA/7/CT3D')
 
 def main():
     test_read_single_image_dicom()
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    test_read_volume()
