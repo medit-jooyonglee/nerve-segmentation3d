@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import time
 import yaml
-import mlflow
+# import mlflow
 import ml_collections
 from collections.abc import MutableMapping
 
@@ -33,7 +33,7 @@ https://github.com/wolny/pytorch-3dunet
 
 def log_metrics(metrics, step, prefix=''):
     prefix_metrics = {prefix + k: v for k, v in metrics.items()}
-    mlflow.log_metrics(prefix_metrics, step)
+    # mlflow.log_metrics(prefix_metrics, step)
 
 
 def load_detection_model(config, to_search=''):
@@ -228,16 +228,16 @@ class Trainer:
         experiment_name = kwargs.get('experiment_name', 'teethnet')
 
         uri = mlflow_path if mlflow_path.startswith('http') else f'file:///{mlflow_path}'
-        mlflow.set_tracking_uri(uri=uri)
+        # mlflow.set_tracking_uri(uri=uri)
         # mlflow.set
         logger.info(f'{mlflow_path=}')
         # mlflow.set_tracking_uri(uri=uri)
-        exp = mlflow.get_experiment_by_name(experiment_name)
-        if not exp:
-            experiment_id = mlflow.create_experiment(experiment_name)
-        else:
-            experiment_id = exp.experiment_id
-        self.experiment_id = experiment_id
+        # exp = mlflow.get_experiment_by_name(experiment_name)
+        # if not exp:
+        #     experiment_id = mlflow.create_experiment(experiment_name)
+        # else:
+        #     experiment_id = exp.experiment_id
+        self.experiment_id = experiment_name + time.strftime('%Y%m%d%H%M%S')
         self.run_name = kwargs.get('run_name', time.strftime('%Y%m%d%H%M%S'))
         self.config = kwargs.get('config', {})
 
@@ -351,27 +351,27 @@ class Trainer:
                     items.append((new_key, value))
             return dict(items)
 
-        with mlflow.start_run(run_name=self.run_name, experiment_id=self.experiment_id) as run, \
-            torch.autograd.set_detect_anomaly(True):
+        # with mlflow.start_run(run_name=self.run_name, experiment_id=self.experiment_id) as run, \
+        #     torch.autograd.set_detect_anomaly(True):
             # params = {
             #     'model': self.config['model'],
             #     'trainer': self.config['trainer']
             # }
-            flatten_config = flatten(self.config)
-            for key, val in flatten_config.items():
-                mlflow.log_params({key: val})
-            # mlflow.log_params(self.config['model'])
-            # mlflow.log_params(self.config['trainer'])
+        flatten_config = flatten(self.config)
+        # for key, val in flatten_config.items():
+        #     mlflow.log_params({key: val})
+        # mlflow.log_params(self.config['model'])
+        # mlflow.log_params(self.config['trainer'])
 
-            for _ in range(self.num_epochs, self.max_num_epochs):
-                # train for one epoch
-                should_terminate = self.train()
+        for _ in range(self.num_epochs, self.max_num_epochs):
+            # train for one epoch
+            should_terminate = self.train()
 
-                if should_terminate:
-                    logger.info('Stopping criterion is satisfied. Finishing training')
-                    return
+            if should_terminate:
+                logger.info('Stopping criterion is satisfied. Finishing training')
+                return
 
-                self.num_epochs += 1
+            self.num_epochs += 1
             logger.info(f"Reached maximum number of epochs: {self.max_num_epochs}. Finishing training...")
 
     def prediction_collate(self, dataset, pred):
