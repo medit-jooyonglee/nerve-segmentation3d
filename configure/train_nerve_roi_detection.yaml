@@ -84,7 +84,7 @@ loaders:
   # class of the HDF5 dataset, currently StandardHDF5Dataset and LazyHDF5Dataset are supported.
   # When using LazyHDF5Dataset make sure to set `num_workers = 1`, due to a bug in h5py which corrupts the data
   # when reading from multiple threads.
-  dataset: MultiSegmentRoIDataset
+  dataset: NerveDetectionSet
 
   k_fold: 6
   # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel
@@ -103,63 +103,20 @@ loaders:
     file_paths:
       [
         [
-          c:/dataset/nerve_dataset/reluapp/source,
-          c:/dataset/nerve_dataset/reluapp/gt,
+          D:/temp/make/source,
+          D:/temp/make/gt,
         ],
+      ]
+  valid:
+    # paths to the training datasets
+    file_paths:
+      [
         [
-          c:/dataset/nerve_dataset/AutoPlanning(Nerve_Seg)/source,
-          c:/dataset/nerve_dataset/AutoPlanning(Nerve_Seg)/ground_truth,
-        ],
-        [
-            C:/dataset/nerve_dataset/valid/source,
-            C:/dataset/nerve_dataset/valid/ground_truth,
+          D:/temp/make/source,
+          D:/temp/make/gt,
         ],
       ]
 
-    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
-    slice_builder:
-      name: FilterSliceBuilder
-      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
-      patch_shape: [ 80, 170, 170 ]
-      # train stride between patches
-      stride_shape: [ 20, 40, 40 ]
-      # minimum volume of the labels in the patch
-      threshold: 0.01
-      # probability of accepting patches which do not fulfil the threshold criterion
-      slack_acceptance: 0.01
-
-    transformer:
-      raw:
-        # subtract mean and divide by std dev
-        - name: Standardize
-        # randomly flips the volume in one of the axis
-        - name: RandomFlip
-        # randomly rotates the volume with 90 deg across a randomly chosen plane
-        - name: RandomRotate90
-        - name: RandomRotate
-          # rotate only in ZY plane due to anisotropy
-          axes: [ [ 2, 1 ] ]
-          # rotates by choosing random angle from [-30, 30] deg
-          angle_spectrum: 30
-          mode: reflect
-        - name: ElasticDeformation
-          spline_order: 3
-        - name: ToTensor
-          expand_dims: true
-      label:
-        - name: RandomFlip
-        - name: RandomRotate90
-        - name: RandomRotate
-          # rotate only in ZY plane due to anisotropy
-          axes: [ [ 2, 1 ] ]
-          angle_spectrum: 30
-          mode: reflect
-        - name: ElasticDeformation
-          spline_order: 0
-          # convert target volume to binary mask
-        - name: ToTensor
-          expand_dims: false
-          dtype: long
 
   # configuration of the val loader
 #  val:

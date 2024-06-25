@@ -102,7 +102,7 @@ def create_trainer(config, package=__file__):
     # checkpoint 수정한 경로로 변경
     trainer_config['checkpoint_dir'] = check_pointer_dir
 
-    device_str = config.get('device', '')
+    device_str = config.get('device', 'cuda:0')
     device = torch.device(device_str)
     torch.cuda.set_device(device)
     # if device_str.startswith('cuda'):

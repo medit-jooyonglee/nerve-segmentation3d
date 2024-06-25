@@ -206,10 +206,6 @@ class Augmentations:
             *self._intensity_augments
         ]
 
-        # probs = [a for (a, b) in self._all_augment_pair]
-        # self._all_prob = np.array(probs) / np.sum(probs)
-        # self._al_augment_list = [b for (a, b) in self._all_augment_pair]
-
     def random_compose(self, augment_pairs=[]) -> List[tio.Transform]:
         augment_pairs = augment_pairs or self._all_augment_pair
         augments_list = [b for (a, b) in augment_pairs]
@@ -257,9 +253,3 @@ class Augmentations:
 
         res_numpy = [res[k].data.numpy().copy() for k in images.keys()]
         return res_numpy
-        # if isinstance(src, np.ndarray):
-        #     return res['image'].data.numpy(), res['label'].data.numpy()
-        # else:
-        #     return res['image'].data, res['label'].data
-
-# class Augmentation

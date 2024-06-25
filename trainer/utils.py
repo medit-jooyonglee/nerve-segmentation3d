@@ -20,7 +20,7 @@ def get_logger_path():
     return LOGGER_PATH or logger_path
 
 
-def get_logger(name, level=logging.INFO):
+def get_logger(name='nerve-app', level=logging.INFO):
     global loggers
     if loggers.get(name) is not None:
         return loggers[name]

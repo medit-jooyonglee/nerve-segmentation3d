@@ -1,4 +1,6 @@
 import logging
+import sys
+
 import numpy as np
 import re
 import matplotlib.pyplot as plt
@@ -1901,6 +1903,10 @@ def show_actors(actors, keypress_callback=None, in_window_size=None, show=True, 
                 volume_integer_color=None, image_save=False, savename='', cam_direction=(2, -3, 1), view_up=(0, 0, -1),
                 focal_dist_weight=1.3,
                 spacing=None, rgba=True) -> vtk.vtkRenderer:
+    if sys.platform == 'linux':
+        logger = get_runtime_logger()
+        logger.error('cannot show actors in linux')
+        return
     ren = vtk.vtkRenderer()
 
     if next_func is not None:

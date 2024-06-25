@@ -113,7 +113,7 @@ loaders:
   # class of the HDF5 dataset, currently StandardHDF5Dataset and LazyHDF5Dataset are supported.
   # When using LazyHDF5Dataset make sure to set `num_workers = 1`, due to a bug in h5py which corrupts the data
   # when reading from multiple threads.
-  dataset: NerveBoxDataset
+  dataset: EmtpyROIDataset
   # detection & segmentation 2 stage 모델일 경우, 2stage 학습데이터 로딩시 1stage의 feature을 concat할지 옵션 유무
   concat_feature: true
   # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel

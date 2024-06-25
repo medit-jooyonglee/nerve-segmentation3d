@@ -63,10 +63,11 @@ def default_prediction_collate(batch):
 
 def _loader_classes(name):
     return get_class(name, [
-        'trainer.test.testmodel',
-        'interfaces.pidnetmodel',
-        'patchset',
-        'dataset.loader',
+        # 'trainer.test.testmodel',
+        # 'interfaces.pidnetmodel',
+        # 'patchset',
+        # 'dataset.loader',
+        'dataset.nervedataset',
         # 'vit_pytorch.vit',
     ])
 

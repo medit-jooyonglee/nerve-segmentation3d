@@ -1,0 +1,16 @@
+torchio
+colorlog
+GPUtil
+ml_collections
+numpy
+opencv-python
+packaging
+PyYAML
+scikit-image
+scikit-learn
+scipy
+torch
+pydicom
+pylibjpeg
+pylibjpeg-libjpeg
+ml_collections

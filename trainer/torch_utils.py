@@ -299,7 +299,7 @@ def create_optimizer(optimizer_config, model):
 
 def create_lr_scheduler(lr_config, optimizer):
     if lr_config is None:
-        return None
+        lr_config = {}
     lr_config = {**lr_config}
     class_name = lr_config.get('name', 'ReduceLROnPlateau')
     # m = importlib.import_module('torch.optim.lr_scheduler')
