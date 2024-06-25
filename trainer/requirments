@@ -1,7 +1,6 @@
 colorlog
 GPUtil
 ml_collections
-mlflow
 numpy
 opencv-python
 packaging
@@ -13,3 +12,4 @@ torch
 pydicom
 pylibjpeg
 pylibjpeg-libjpeg
+ml_collections

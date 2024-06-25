@@ -993,6 +993,9 @@ def show_2mask_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
         zyx = np.argwhere(mask_image > 0)
         start, end = zyx[:, 0].min(), zyx[:, 0].max()
 
+    if np.issubdtype(mask_image.dtype, np.integer):
+        mask_image = mask_image.astype(np.int32)
+
     in_rainbow_mask = in_rainbow_size > 0
     if in_rainbow_mask:
         color_table = get_rainbow_color_table(mask_image.max())

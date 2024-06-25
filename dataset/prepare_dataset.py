@@ -7,6 +7,9 @@ import json
 from trainer import diskmanager, get_logger
 from trainer import get_logger
 from trainer import image_utils
+from trainer import utils
+from tools import utils_numpy
+
 from tools import dicom_read_wrapper, vtk_utils
 
 get_runtime_logger = get_logger
@@ -79,10 +82,10 @@ def recon_volume(coords, shape, target_shape=None, coords_order='xyz'):
     return res
 
 
-def recon_volume2(coords, shape, coords_order='xyz'):
+def recon_volume2(coords, shape, coords_order='xyz', dtype='float32'):
     lefts, rights = coords
     # target_shape = shape if target_shape is None else np.asarray(target_shape)
-    volume = np.zeros([*shape], dtype=np.float32)
+    volume = np.zeros([*shape], dtype=dtype)
     for i, (coord, label) in enumerate(zip([lefts, rights ], [LEFT, RIGHT])):
         i0, j0, k0 = [np.squeeze(v).astype(np.int32) for v in np.split(coord, 3, axis=-1)]
         if coords_order == 'xyz':
@@ -211,9 +214,10 @@ def convert_main(souce_path, label_path, save_path, label_ext='.json', vtk_order
         logger.info(f'save complete\n {npy_src_name=}\n {npy_gt_name=}')
 
 
-def display_2d_image():
-    source_path = 'D:/temp/make/source'
-    gt_path = 'D:/temp/make/gt'
+def display_2d_image(source_path='D:/temp/make/source',
+                     gt_path='D:/temp/make/gt', save_path='d:/temp/make/result',
+                     stride_ratio=0.05):
+
     src_files = diskmanager.deep_serach_files(source_path, ['.npy'])
     gt_files = diskmanager.deep_serach_files(gt_path, ['.npy'])
 
@@ -235,7 +239,20 @@ def display_2d_image():
         left_right_key = [k for p in ['left', 'right'] for k, v in table.items() if p == v]
         left_right_coords = [coords[key] for key in left_right_key]
         # [k for k, v in gt_item['table'].items() if v == 'left']
-        label_volume = recon_volume2(left_right_coords, norm_volume.shape, coords_order=coord_order)
+        label_volume = recon_volume2(left_right_coords, norm_volume.shape, coords_order=coord_order, dtype='uint8')
+
+        stride = int(norm_volume.shape[0] * stride_ratio)
+        # axial
+        image_utils.show_2mask_image(norm_volume * 255, label_volume, show=False,
+                                     save_path=save_path, image_save=True, create_sub_dir=True,
+                                     stride=stride, in_rainbow_size=10)
+        # coronal
+        vol1, vol2 = [np.transpose(v, [1, 2, 0]) for v in [norm_volume, label_volume]]
+        stride = int(norm_volume.shape[0] * stride_ratio)
+
+        image_utils.show_2mask_image(vol1 * 255, vol2, show=False,
+                                     save_path=save_path, image_save=True, create_sub_dir=True, transpose=True,
+                                     stride=stride, in_rainbow_size=10)
 
 
 def main(args=None):
@@ -256,11 +273,13 @@ def main(args=None):
 
 if __name__ == '__main__':
     # convert_main()
-    pytest.main()
+    # pytest.main()
     # import pdb; pdb.set_trace()
-    pytest.main()
-    main([
-        '--source=D:/dataset/ai_hub_labels/CTDATA',
-        '--gt=D:/dataset/ai_hub_labels/CTDATA',
-        '--savedir=d:/temp/make_not_vtk',
-    ])
+    # pytest.main()
+    # main([
+    #     '--source=D:/dataset/ai_hub_labels/CTDATA',
+    #     '--gt=D:/dataset/ai_hub_labels/CTDATA',
+    #     '--savedir=d:/temp/make_not_vtk',
+    # ])
+
+    display_2d_image()
