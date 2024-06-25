@@ -68,6 +68,7 @@ def test_nerved_detection_emptyset(nerved_detection_emptyset_config):
         assert False
 
     trainer.num_iterations = 2
+    trainer.num_epochs = 2
     trainer.log_after_iters = 1
     trainer.fit()
 
@@ -80,6 +81,7 @@ def test_nerve_roi_segmentation_emptyseg(nerve_roi_segmentation_emptyseg_config)
         print(e.args)
         assert False
     trainer.num_iterations = 2
+    trainer.num_epochs = 2
     trainer.log_after_iters = 1
     trainer.fit()
 
