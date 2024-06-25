@@ -22,21 +22,44 @@ def read_single_image_array(file):
     res = ((img - a) * (255 / (b - a))).astype(np.uint8)
     return res
 
-def read_volume_axes(path):
+
+def read_volume_pydicom(path, **kwargs):
     # def read_dicom_series(folder_path):
+    vtkorder = kwargs.get('vtkorder', False)
+    return_windowing = kwargs.get('return_windowing', False)
+    normalize = kwargs.get('normalize', True)
     dicom_files = glob.glob(os.path.join(path, '*.dcm'))
     slices = [pydicom.dcmread(file) for file in dicom_files]
     slices.sort(key=lambda x: float(x.ImagePositionPatient[2]))
-    instance_numbers = [int(slice_instance.InstanceNumber) for slice_instance in slices]
-    volume = np.stack([slice_instance.pixel_array for slice_instance in slices], axis=-1)
+    ds = slices[0]
 
-    ds
+    instance_numbers = [int(slice_instance.InstanceNumber) for slice_instance in slices]
+    volume = np.stack([slice_instance.pixel_array for slice_instance in slices], axis=0)
+
+    image_position_tag = (0x0020, 0x0032)
+    image_orientation_tag = (0x0020, 0x0037)
+    slice_location_tag = (0x0020, 0x1041)
+    position = ds[image_position_tag]
+    orientation = ds[image_orientation_tag]
+    spacing_tag = (0x0028,0x0030)
+    spacing = ds[spacing_tag].value
+    spacing = [*spacing, spacing[0]] if len(spacing) == 2 else spacing
+    # ds
     ww, wc = ds.WindowWidth, ds.WindowCenter
     dmin = int(wc) - int(ww) / 2
     dmax = int(wc) + int(ww) / 2
 
-    return volume, instance_numbers
+    volume = volume[::-1, ::-1] if vtkorder else volume
+    if normalize:
+        norm_volume = np.clip((volume - dmin) / (dmax - dmin), 0, 1)
+    else:
+        norm_volume = volume
+    windowing = (dmin, dmax)
 
+    outs = [norm_volume, spacing]
+    if return_windowing:
+        outs.append(windowing)
+    return outs
 
 
 def read_dicom_wrapper(*args, **kwargs):
@@ -60,7 +83,8 @@ def read_dicom_wrapper(*args, **kwargs):
     windowing : tuple[float], optional
         the range value. min~max
     """
-
+    if CVolumeDicomReader is None:
+        return read_volume_pydicom(args[0], **kwargs)
     # np.ndarray,
     #     volume (d, h, w)
     # np.ndarray,

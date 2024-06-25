@@ -12,6 +12,13 @@ import psutil
 
 loggers = {}
 
+LOGGER_PATH = ''
+
+def get_logger_path():
+    logger_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../logs')
+    logger_path = os.path.abspath(logger_path)
+    return LOGGER_PATH or logger_path
+
 
 def get_logger(name, level=logging.INFO):
     global loggers
@@ -46,18 +53,21 @@ def get_logger(name, level=logging.INFO):
         # stream_handler = logging.StreamHandler(sys.stdout)
         stream_handler = logging.StreamHandler()
         stream_handler.setLevel(level)
+        stream_handler.setFormatter(formatter)
 
-        # fh = logging.FileHandler(os.path.join(logger_path, "{}.log".format(logger_name)))
-        # fh.setLevel(default_level)
+        logger_path = get_logger_path()
+        if not os.path.exists(logger_path):
+            os.makedirs(logger_path)
 
+        fh = logging.FileHandler(os.path.join(logger_path, "{}.log".format(name)))
+        fh.setLevel(level)
+        fh.setFormatter(formatter)
         # formatter = logging.Formatter(
         #     )
-        stream_handler.setFormatter(formatter)
         #
         # fh = logging.FileHandler(os.path.join('', "{}.log".format(name)))
         # fh.setLevel(level)
-        # logger.addHandler(fh)
-
+        logger.addHandler(fh)
         logger.addHandler(stream_handler)
 
         loggers[name] = logger

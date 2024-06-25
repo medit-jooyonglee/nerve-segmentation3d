@@ -28,6 +28,13 @@ def main():
     test_read_single_image_dicom()
 
 
+def test_visualize_dicom_read():
+    filename = 'D:/dataset/ai_hub_labels/CTDATA/7/CT3D'
+
+    volume, spacing, windowing = dicom_read_wrapper.read_volume_pyciom(filename)
+
+
 if __name__ == '__main__':
     # main()
-    test_read_volume()
+    # test_read_volume()
+    test_visualize_dicom_read()

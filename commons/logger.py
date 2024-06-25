@@ -11,7 +11,7 @@ LOGGER_PATH = ''
 RESOURCE_PATH = os.path.join(BASE_PATH, "resource")
 
 __version__ = "1.1.0"
-INIT_LOGGER_NAME = "AutoPlanning"
+INIT_LOGGER_NAME = __name__
 runtime_logger = []
 
 
