@@ -40,6 +40,7 @@ def test_trainer_nerve_segmentation(nerve_detection_config):
     try:
         trainer = create_trainer(nerve_detection_config)
     except Exception as e:
+        print(e.args)
         assert False
     trainer.num_iterations = 2
     trainer.log_after_iters = 1
@@ -51,6 +52,7 @@ def test_trainer_nerve_detection(nerve_roi_segmentation_config):
     try:
         trainer = create_trainer(nerve_roi_segmentation_config)
     except Exception as e:
+        print(e.args)
         assert False
     trainer.num_iterations = 2
     trainer.log_after_iters = 1
@@ -62,6 +64,7 @@ def test_nerved_detection_emptyset(nerved_detection_emptyset_config):
     try:
         trainer = create_trainer(nerved_detection_emptyset_config)
     except Exception as e:
+        print(e.args)
         assert False
 
     trainer.num_iterations = 2
@@ -74,6 +77,7 @@ def test_nerve_roi_segmentation_emptyseg(nerve_roi_segmentation_emptyseg_config)
     try:
         trainer = create_trainer(nerve_roi_segmentation_emptyseg_config)
     except Exception as e:
+        print(e.args)
         assert False
     trainer.num_iterations = 2
     trainer.log_after_iters = 1
