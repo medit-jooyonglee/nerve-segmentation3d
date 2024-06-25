@@ -22,7 +22,7 @@ def nerve_roi_segmentation_config():
 @pytest.fixture()
 def nerved_detection_emptyset_config():
 
-    config_file = 'train_nerve_roi_detection.yaml'
+    config_file = 'train_nerve_roi_detection_empty.yaml'
     config = load_config(config_file, os.path.join(root, '../configure'))
     return config
 
@@ -30,7 +30,7 @@ def nerved_detection_emptyset_config():
 @pytest.fixture()
 def nerve_roi_segmentation_emptyseg_config():
 
-    config_file = 'train_transunet_nerve_roi_segmentation_liteweight.yaml'
+    config_file = 'train_transunet_nerve_roi_segmentation_liteweight_empty.yaml'
     config = load_config(config_file, os.path.join(root, '../configure'))
     return config
 
