@@ -1,0 +1,141 @@
+device: cuda:0
+eval_metric:
+  SegmentOffsetMetric2:
+    mask_segment_applied: true
+  multiple: true
+  name: SegmentClassificationMetric
+  names:
+  - SegmentClassificationMetric
+loaders:
+  batch_size: 1
+  boundary_method: radius_neighbor
+  dataset: EmptyROISegDataTeethSet
+  edge_type: arch_label
+  feature:
+  - curvature
+  in_channels: 3
+  input_background_value: 0
+  label_internal_path: label
+  n_classes: 16
+  num_negative_factor: 0.1
+  num_workers: 0
+  pool_shape:
+  - 23
+  - 23
+  - 23
+  raw_internal_path: raw
+  spacing:
+  - 0.4
+  - 0.4
+  - 0.4
+  train:
+    file_paths:
+    - C:/dataset/mesh_segmentation/full_convert
+  valid:
+    file_paths:
+      - C:/dataset/mesh_segmentation/full_convert
+  trim_positive_bound: true
+  weight_internal_path: null
+  z_aligned: true
+loss:
+  alpha: 1.0
+  beta: 50
+  gamma: 0.5
+  name: SegmentClassificationLoss
+  pred_class_weight: 10.0
+  seg_mask: true
+  stat_class_weight: 0.5
+lr_scheduler:
+  factor: 0.2
+  mode: max
+  name: ReduceLROnPlateau
+  patience: 8
+model:
+  attention_mode: self_attention
+  backbone: true
+  backbone_model1:
+    basic_module: ResNetBlock
+    conv_kernel_size: 3
+    conv_padding: 1
+    f_maps:
+    - 8
+    - 16
+    - 32
+    - 64
+    in_channels: 3
+    is3d: true
+    is_segmentation: true
+    layer_order: cgr
+    num_groups: -1
+    out_channels: 3
+    pool_kernel_size: 2
+    pool_type: avg
+    return_intermediate_feature: true
+    se_module: sse
+    used_roi_gt: true
+  backbone_model2:
+    basic_module: ResNetBlockSE
+    conv_kernel_size: 3
+    conv_padding: 1
+    f_maps:
+    - 8
+    - 16
+    - 32
+    - 64
+    in_channels: 1
+    is3d: true
+    is_segmentation: true
+    layer_order: cgr
+    num_groups: -1
+    out_channels: 3
+    pool_kernel_size: 2
+    pool_type: avg
+    return_intermediate_feature: true
+    se_module: sse
+    used_roi_gt: true
+#  detection: CHECKPOINT_DIR/mesh_voxelizer_center_proposal_max_dilate_mask_onlyseg_avg_resnetblock_loss_weight_50_double_decoder
+  final_classification_activation: identity
+  hidden_size: 192
+  n_classes: 33
+  name: ROIAttentionSegmentClassifier
+  num_classes: 33
+  num_geo_dim: 3
+  pool_shape:
+  - 23
+  - 23
+  - 23
+  roi_dim: 9
+  split_backbone_segment_classification: true
+  stat_model: true
+  temperature: 1000
+  transformer:
+    attention_dropout_rate: 0.1
+    dropout_rate: 0.1
+    geo_feature_dim: 576
+    mlp_dim: 120
+    num_heads: 4
+    num_layers: 2
+    parallel: false
+    vis: true
+    wave_len: 1000
+  used_multiple_backbone: true
+  used_segment_transformer: false
+optimizer:
+  learning_rate: 0.0005
+  weight_decay: 1.0e-05
+#saver:
+#  image_save_dir: d:/temp/unet3d_roi_seg_classification
+#  name: mesh_voxelize_segment_classification
+trainer:
+  checkpoint_dir: CHECKPOINT_DIR/mesh_voxelizer_roi_segment_classifier_16_classes_4_head_resnetblock333
+  eval_score_higher_is_better: true
+  experiment_name: mesh_voxelizer_roi_segment_classifier
+  k_fold_cross_validation: true
+  log_after_iters: 500
+  max_num_epochs: 200
+  max_num_iterations: 100000
+  pre_trained: null
+  resume: true
+  run_name: mesh_voxelizer_roi_segment_classifier_16_classes_4_head_resnetblock333
+  skip_train_validation: true
+  validate_after_iters: 1000

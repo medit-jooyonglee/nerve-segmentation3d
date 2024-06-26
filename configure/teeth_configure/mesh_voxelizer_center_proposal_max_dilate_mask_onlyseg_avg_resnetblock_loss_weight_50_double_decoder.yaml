@@ -1,0 +1,81 @@
+device: cuda:0
+eval_metric:
+  SegmentOffsetMetric2:
+    mask_segment_applied: true
+  multiple: true
+  name: SegmentOffsetMetric2
+  names:
+  - SegmentOffsetMetric2
+loaders:
+  batch_size: 1
+  dataset: EmptyDataTeethSet
+  edge_type: arch_label
+  feature:
+  - curvature
+  in_channels: 1
+  label_internal_path: label
+  n_classes: 3
+  num_workers: 0
+  raw_internal_path: raw
+  spacing:
+  - 0.4
+  - 0.4
+  - 0.4
+  train:
+    file_paths:
+    - C:/dataset/mesh_segmentation/full_convert
+    - C:/dataset/mesh_segmentation/full_convert
+  valid:
+    file_paths:
+      - C:/dataset/mesh_segmentation/full_convert
+      - C:/dataset/mesh_segmentation/full_convert
+  weight_internal_path: null
+  z_aligned: true
+loss:
+  alpha: 1.0
+  beta: 50
+  gamma: 0.5
+  name: MeshSegmentOffsetLoss
+  seg_mask: true
+lr_scheduler:
+  factor: 0.2
+  mode: max
+  name: ReduceLROnPlateau
+  patience: 8
+model:
+  basic_module: ResNetBlock
+  double_decoder: true
+  f_maps:
+  - 8
+  - 16
+  - 32
+  - 64
+  final_sigmoid: true
+  in_channels: 1
+  is_segmentation: true
+  layer_order: cgl
+  name: Unet3DSegOffset
+  num_groups: -1
+  parallel: false
+  pool_type: max
+  segment_ch: 3
+  sharing_decoder: false
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+#saver:
+#  image_save_dir: d:/temp/image_save_segmentation
+#  name: image_save_center_mesh_segmentation
+trainer:
+  checkpoint_dir: CHECKPOINT_DIR/mesh_voxelizer_center_proposal_max_dilate_mask_onlyseg_avg_resnetblock_loss_weight_50_double_decoder
+  eval_score_higher_is_better: true
+  experiment_name: mesh_voxelizer_center_proposal
+  k_fold_cross_validation: true
+  log_after_iters: 500
+  max_num_epochs: 200
+  max_num_iterations: 100000
+  pre_trained: null
+  resume: true
+  run_name: mesh_voxelizer_center_proposal_max_dilate_mask_onlyseg_avg_resnetblock_loss_weight_50_double_decoder
+  skip_train_validation: true
+  validate_after_iters: 1000

@@ -29,7 +29,7 @@ def test_empty_config_file():
 def test_load_config():
     config_filename = 'configure/train_nerve_roi_detection.yaml'
     config = load_config(config_filename, '../')
-
+    from dataset.nervedataset import NerveBoxDataset
     assert isinstance(config, ml_collections.ConfigDict)
 
 # def test_empty_find_config():

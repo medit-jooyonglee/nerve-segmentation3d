@@ -261,3 +261,43 @@ class NerveBoxDataset(NerveDetectionSet):
         # masks = np.stack(masks, axis=0)
         # vol_stack = vol[np.neaaxis]
         return src_aug, tar_aug
+
+
+class EmptyDataTeethSet(Dataset):
+    def __init__(self, **kwargs):
+        super(EmptyDataTeethSet, self).__init__()
+        pass
+    def __len__(self):
+        return 10000
+
+    def __getitem__(self, idx):
+        segment_ch = 3
+        coord_ndim = 3
+        # x = np.ran
+        # dom.randn(1, 128, 128, 128)
+        shape = (128, ) * 3
+        x = np.random.randn(1, *shape)
+        seg = np.random.randn(2, *shape).clip(0, segment_ch - 1).astype(np.int64)
+        offset = np.random.randn(coord_ndim, *shape)
+        return x, ((seg, offset), )
+        # return x[None], x.astype(np.int64).clip(0, 1)
+
+
+class EmptyROISegDataTeethSet(Dataset):
+    def __init__(self, **kwargs):
+        super(EmptyROISegDataTeethSet, self).__init__()
+
+    def __len__(self):
+        return 10000
+
+    def __getitem__(self, idx):
+        segment_ch = 3
+        coord_ndim = 3
+        # x = np.ran
+        # dom.randn(1, 128, 128, 128)
+        shape = (128, ) * 3
+        x = np.random.randn(1, *shape)
+        seg = np.random.randn(2, *shape).clip(0, segment_ch - 1).astype(np.int64)
+        offset = np.random.randn(coord_ndim, *shape)
+        return x, ((seg, offset), )
+        # return x[None], x.astype(np.int64).clip(0, 1)

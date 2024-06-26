@@ -919,7 +919,7 @@ class MeshSegmentOffsetLoss(nn.Module):
         self.alpha = alpha
         self.beta = beta
         self.gamma = gamma
-        self.dice = BCEDiceLoss(.5, .5)
+        self.dice = BCEDiceLoss(alpha=.5, beta=.5)
         self.smooth_l1 = SmoothL1Loss()
         self.kwargs = kwargs
         self.seg_mask = kwargs.get('seg_mask', True)
@@ -993,7 +993,7 @@ class SegmentClassificationLoss(nn.Module):
         w0[0] = 0.5
         w = torch.tensor(w0).cuda()
         # weights = torch.ones([], dtype=torch.float32).cuda()
-        self.bce_seg_dice = BCEDiceLoss(.5, .5)
+        self.bce_seg_dice = BCEDiceLoss(alpha=.5, beta=.5)
         # self.classification_criterion = nn.CrossEntropyLoss(weight=w)
         self.classification_criterion = BCEWithLogitsLoss(pos_weight=w)
         self.stat_class_weight = config.get('stat_class_weight', 0.01)
