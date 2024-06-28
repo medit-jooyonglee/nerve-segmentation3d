@@ -22,7 +22,7 @@ def read_single_image_array(file):
     res = ((img - a) * (255 / (b - a))).astype(np.uint8)
     return res
 
-
+os.mak
 def read_volume_pydicom(path, **kwargs):
     # def read_dicom_series(folder_path):
     vtkorder = kwargs.get('vtkorder', False)

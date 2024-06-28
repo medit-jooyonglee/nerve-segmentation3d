@@ -113,18 +113,18 @@ def test_teeth_center_proposal_emptyseg(teeth_center_proposal_config):
     trainer.log_after_iters = 1
     trainer.fit()
 
-
-def test_teeth_roi_segment_emptyseg(teeth_roi_segment_config):
-    # config = get_model(nerve_detection_config)
-    try:
-        trainer = create_trainer(teeth_roi_segment_config)
-    except Exception as e:
-        print(e.args)
-        assert False
-    trainer.max_num_iterations = 2
-    trainer.num_epochs = 2
-    trainer.log_after_iters = 1
-    trainer.fit()
+#
+# def test_teeth_roi_segment_emptyseg(teeth_roi_segment_config):
+#     # config = get_model(nerve_detection_config)
+#     try:
+#         trainer = create_trainer(teeth_roi_segment_config)
+#     except Exception as e:
+#         print(e.args)
+#         assert False
+#     trainer.max_num_iterations = 2
+#     trainer.num_epochs = 2
+#     trainer.log_after_iters = 1
+#     trainer.fit()
 
 
 def main():
@@ -135,10 +135,10 @@ def main():
         # __file__,
         # __file__ + '::test_trainer_nerve_segmentation',
         # __file__ + '::test_trainer_nerve_detection',
-        # __file__ + '::test_nerved_detection_emptyset',
+        __file__ + '::test_nerved_detection_emptyset',
         # __file__ + '::test_nerve_roi_segmentation_emptyseg',
         # __file__ + '::test_nerve_roi_segmentation_emptyseg',
-        __file__ + '::test_teeth_roi_segment_emptyseg',
+        # __file__ + '::test_teeth_roi_segment_emptyseg',
         # __file__
     ])
 

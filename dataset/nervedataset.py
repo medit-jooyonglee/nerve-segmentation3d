@@ -73,7 +73,7 @@ class NerveDetectionSet(Dataset):
             self.labels.extend(gt_files)
         self.items = {}
         self.en_augmented = True# self
-        self.always_file_load = False
+        self.always_file_load = True
         self._index = 0
 
     # def splits(self):

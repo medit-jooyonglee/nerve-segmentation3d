@@ -68,6 +68,7 @@ def _loader_classes(name):
         # 'patchset',
         # 'dataset.loader',
         'dataset.nervedataset',
+        'dataset.miccaitoothfairy',
         # 'vit_pytorch.vit',
     ])
 
