@@ -41,7 +41,7 @@ trainer:
   # max number of epochs
   max_num_epochs: 200
   # max number of iterations
-  max_num_iterations: 100000
+  max_num_iterations: 500000
   # model with higher eval score is considered better
   eval_score_higher_is_better: True
 
@@ -50,6 +50,7 @@ trainer:
   k_fold_cross_validation: true
   experiment_name: cbct_ian_detection
   run_name: miccai_dataset_ian_dtection
+  mlflow_path: http://10.100.1.45:5000
 
 # loss function configuration
 loss:

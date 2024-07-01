@@ -117,7 +117,7 @@ def get_train_loaders(config):
 
 
     return {
-        'train': DataLoader(train_datasets, batch_size=batch_size, shuffle=True, pin_memory=True,
+        'train': DataLoader(train_datasets, batch_size=batch_size, shuffle=False, pin_memory=True,
                             num_workers=num_workers),
         # don't shuffle during validation: useful when showing how predictions for a given batch get better over time
         'valid': DataLoader(valid_datasets, batch_size=batch_size, shuffle=False, pin_memory=True,

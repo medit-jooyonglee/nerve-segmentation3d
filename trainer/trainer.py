@@ -2,6 +2,7 @@ import os
 import glob
 import random
 import torch
+import numpy as np
 import torch.nn as nn
 import time
 import yaml
@@ -170,9 +171,11 @@ def create_evaluator(config):
     trainer = create_trainer(config)
     # 로더만 변경한다.
     # all_data = trainer.k_folder.get_all_dataset()
-
-    trainer.loaders['valid'].dataset.set_data_path_pair(trainer.k_folder.get_all_dataset())
-    trainer.loaders['valid'].dataset.eval()
+    trainer.loaders['valid'].dataset.en_augmented = False
+    # trainer.loaders['valid'].dataset._num_save_image = False
+    trainer.loaders['valid'].dataset._num_reuse_image = 1
+    # trainer.loaders['valid'].dataset.set_data_path_pair(trainer.k_folder.get_all_dataset())
+    # trainer.loaders['valid'].dataset.eval()
     return trainer
 
 
@@ -443,10 +446,10 @@ class Trainer:
 
                 # save checkpoint
                 self._save_checkpoint(is_best)
-                if self.k_fold_cross_validation:
-                    self.k_folder.shift_folding()
-                    self.loaders['train'].dataset.set_data_path_pair(self.k_folder.get_dataset('train'))
-                    self.loaders['valid'].dataset.set_data_path_pair(self.k_folder.get_dataset('valid'))
+                # if self.k_fold_cross_validation:
+                #     self.k_folder.shift_folding()
+                #     self.loaders['train'].dataset.set_data_path_pair(self.k_folder.get_dataset('train'))
+                #     self.loaders['valid'].dataset.set_data_path_pair(self.k_folder.get_dataset('valid'))
 
                 self.num_epochs += 1
 
@@ -513,7 +516,7 @@ class Trainer:
 
         val_losses = utils.RunningAverage('loss')
         val_scores = utils.RunningAverage('eval_scores')
-
+        # from tools import vtk_utils
         # self.loaders['valid'].dataset.train(False)
         with torch.no_grad():
             # for i in range(len(self.loaders['valid'].dataset)):
@@ -528,6 +531,11 @@ class Trainer:
                     continue
                 # output, loss = self._forward_pass(inputs, target, weight)
                 eval_score = self.evaluate_multiple_metrics(output, target)
+
+                # ins, pred, tar = torch_utils.to_numpy((inputs, torch.argmax(output, dim=1), target))
+                # ins = ins.clip(0, 1)
+                # pred, tar = pred.astype(np.int32), tar.astype(np.int32)
+                # vtk_utils.split_show([ins], [ins, pred], item3= [ins, tar])
 
                 self.prediction_collate(self.loaders['valid'].dataset, output)
 

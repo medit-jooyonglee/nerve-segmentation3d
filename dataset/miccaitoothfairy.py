@@ -9,7 +9,7 @@ from dataset.mha import read_image_volume
 from dataset.augmentio import Augmentations
 import logging
 
-logger = get_logger('miccaitoothfairy', logging.DEBUG)
+logger = get_logger('miccaitoothfairy')
 # from .nervedataset import NerveBoxDataset, NerveDetectionSet
 LEFT = 1
 RIGHT = 2
@@ -299,6 +299,7 @@ class NerveMICCAIBoxSet(NerveMICCAISet):
 
         # for coords in sample_coords:
         coords = sample_coords[np.random.choice(len(sample_coords))]
+        coords = coords if coords.shape[0] > 3 else np.random.uniform(30, 60, [10, 3])
         augment_param = self.get_obb_augment_param() if self.en_augmented else {}
         sample_volumes, obb_meta, warp_points = image_utils.volume_sampling_from_coords(volumes_list,
                                                                                         coords, pool_seed,

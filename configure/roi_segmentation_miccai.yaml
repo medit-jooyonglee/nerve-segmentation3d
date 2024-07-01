@@ -59,7 +59,7 @@ model:
 # trainer configuration
 trainer:
   # path to the checkpoint directory
-  checkpoint_dir: CHECKPOINT_DIR/nerve_roi_vit_segmentation_liteweight
+  checkpoint_dir: CHECKPOINT_DIR/roi_segmentaiton_miccai
   # path to the latest checkpoint; if provided the training will be resumed from that checkpoint, if bool type, find best checkpoints in checkpoint_dir
   resume: true
   # loss using weights mask
@@ -74,11 +74,16 @@ trainer:
   # max number of epochs
   max_num_epochs: 200
   # max number of iterations
-  max_num_iterations: 100000
+  max_num_iterations: 500000
   # model with higher eval score is considered better
   eval_score_higher_is_better: True
 
   skip_train_validation: True
+
+  experiment_name: cbct_ian_sementation
+  run_name: miccai_dataset_ian_segmentation
+  mlflow_path: http://10.100.1.45:5000
+
 # loss function configuration
 loss:
   # use BCE loss for training
@@ -113,7 +118,7 @@ loaders:
   # class of the HDF5 dataset, currently StandardHDF5Dataset and LazyHDF5Dataset are supported.
   # When using LazyHDF5Dataset make sure to set `num_workers = 1`, due to a bug in h5py which corrupts the data
   # when reading from multiple threads.
-  dataset: NerveBoxDataset
+  dataset: NerveMICCAIBoxSet
   # detection & segmentation 2 stage 모델일 경우, 2stage 학습데이터 로딩시 1stage의 feature을 concat할지 옵션 유무
   concat_feature: true
   # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel
@@ -133,8 +138,8 @@ loaders:
     file_paths:
       [
         [
-          D:/temp/make/source,
-          D:/temp/make/gt,
+          './dataset/data_split_miccai.json',
+          'train',
         ],
       ]
   valid:
@@ -142,8 +147,8 @@ loaders:
     file_paths:
       [
         [
-          D:/temp/make/source,
-          D:/temp/make/gt,
+          './dataset/data_split_miccai.json',
+          'valid',
         ],
       ]
 
