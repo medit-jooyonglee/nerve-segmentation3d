@@ -34,7 +34,7 @@ https://github.com/wolny/pytorch-3dunet
 
 def log_metrics(metrics, step, prefix=''):
     prefix_metrics = {prefix + k: v for k, v in metrics.items()}
-    # mlflow.log_metrics(prefix_metrics, step)
+    mlflow.log_metrics(prefix_metrics, step)
 
 
 def load_detection_model(config, to_search=''):

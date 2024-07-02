@@ -7,7 +7,7 @@ import torch
 import ml_collections
 import GPUtil
 from colorlog import ColoredFormatter
-
+import time
 import psutil
 
 loggers = {}
@@ -320,9 +320,13 @@ def print_system_memory():
 
 
 def print_system_usage():
-    print_gpu_usage()
-    print_cpu_usage()
-    print_ram_usage()
+    while 1:
+        
+        print_gpu_usage()
+        print_cpu_usage()
+        print_ram_usage()
+        time.sleep(60)
+
 
 if __name__ == '__main__':
     print_system_usage()

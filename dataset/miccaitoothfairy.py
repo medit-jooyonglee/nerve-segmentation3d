@@ -23,17 +23,36 @@ def check_all_data(src_files, label_files):
     np.testing.assert_array_equal(src_ids, label_ids)
 
 
+
+def sort_file(src_files, label_files):
+    
+    return sorted(src_files), sorted(label_files)
+    #    def basename(filename): return os.path.splitext(os.path.basename(filename))[0]
+#    def split_id(filename, i):i
+#        splits = filename.split('_')[-i]
+#        return int(splits), len(splits)
+#
+#
+#    src_ids = [split_id(basename(name), 2) for name in src_files]
+#    label_ids = [split_id(basename(name), 1) for name in label_files]
+#    np.testing.assert_array_equal(src_ids, label_ids)
+
+
 def data_split_path(src_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/imagesTr',
                     label_pathname='D:/dataset/miccai/Dataset112_ToothFairy2/labelsTr', train_weights=0.9,
                     save_path='./'):
 
     src_files = glob.glob(os.path.join(src_pathname, '*.mha'))
     label_files = glob.glob(os.path.join(label_pathname, '*.mha'))
+    print(f'file size {len(src_files)}')
+#    print(src_files)
 
     assert len(src_files) == len(label_files)
-
-    check_all_data(src_files, label_files)
-
+    try:
+        check_all_data(src_files, label_files)
+    except Exception as e:
+        src_files, label_files = sort_file(src_files, label_files)
+        check_all_data(src_files, label_files)
     num_split = int(train_weights * len(src_files))
     num_valid = len(src_files) - num_split
     train_srcs, train_labels = src_files[:num_split], label_files[:num_split]
@@ -49,15 +68,19 @@ def data_split_path(src_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/ima
             'label': valid_labels,
         },
     }
-
-    with open(os.path.join(save_path, 'data_splsit.json'), 'w') as f:
+    print(f'save complete{save_path} ')
+    with open(os.path.join(save_path, 'data_split_miccai.json'), 'w') as f:
         json.dump(datas, f, indent='\t')
 
 def data_split_create_list():
-    src_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/imagesTr'
-    label_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/labelsTr'
+#    src_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/imagesTr'
+#    label_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/labelsTr'
+
+    src_pathname = '/data1/miccai/Dataset112_ToothFairy2/imagesTr'
+    label_pathname = '/data1/miccai/Dataset112_ToothFairy2/labelsTr'
 
 
+#    label_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/labelsTr'
     src_files = glob.glob(os.path.join(src_pathname, '*.mha'))
     label_files = glob.glob(os.path.join(label_pathname, '*.mha'))
     print(len(src_files), len(label_files))
@@ -331,4 +354,9 @@ if __name__ == '__main__':
     # glob.glob()
     # filename = ''
     # data_split_path()
-    data_split_create_list()
+
+    
+    src_pathname = '/data1/miccai/Dataset112_ToothFairy2/imagesTr'
+    label_pathname = '/data1/miccai/Dataset112_ToothFairy2/labelsTr'
+    data_split_path(src_pathname, label_pathname, save_path='./dataset')
+    #    data_split_create_list()
