@@ -898,7 +898,7 @@ def get_rainbow_color_table(number):
     return landmark_color_table
 
 
-def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
+def compare_image(vol_image, mask_image, other_mask_image=[], thres=.5, pause_sec=0.01, stride=1,
                   concat_original=False, full_region=True, image_save=False, save_path='temp', show=True,
                   transpose=False,
                   create_sub_dir=True,
@@ -909,7 +909,10 @@ def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
     :param mask_image:
     :return:
     """
-
+    other_same_shape_mask = [v for v in other_mask_image if v.shape == mask_image.shape]
+    if len(other_same_shape_mask) != len(other_mask_image):
+        logger = get_runtime_logger()
+        logger.warning(f'not same shape{[v.shpae for v in other_mask_image]} / {mask_image.shape}')
 
     if show:
         fig = plt.figure()
@@ -956,9 +959,30 @@ def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
             utils_numpy.apply_blending_mask(drawing, mask)
         else:
             utils_numpy.apply_mask(drawing, ma, (0, 1, 0), thres)
+        # other items
+        others_drawing = []
+        for m0 in other_same_shape_mask:
+            slice = m0[i] if not transpose else m0[i].T
+            color_m0 = color_mapping[slice] if in_rainbow_mask else slice
+            d0 = drawing_src.copy()
+            if in_rainbow_mask:
+                utils_numpy.apply_blending_mask(d0, color_m0)
+            else:
+                utils_numpy.apply_mask(d0, color_m0, (0, 1, 0), thres)
+            others_drawing.append(d0)
+
+
+        bound_w = int(drawing.shape[1] * 0.15)
+        boundary = np.full([drawing.shape[0], bound_w, drawing.shape[2]], 255, dtype=drawing.dtype)
+
+        if others_drawing:
+            drawing_list = [drawing]
+            for other in others_drawing:
+                drawing_list.extend([boundary, other])
+            drawing = np.concatenate(drawing_list, axis=1)
+
         if concat_original:
-            bound_w = int(drawing.shape[1] * 0.2)
-            boundary = np.full([drawing.shape[0], bound_w, drawing.shape[2]], 255, dtype=drawing.dtype)
+
             drawing = np.concatenate([drawing_src, boundary, drawing], axis=1)
 
         if show:

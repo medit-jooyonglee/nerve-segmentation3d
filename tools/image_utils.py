@@ -910,8 +910,8 @@ def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
     """
 
 
-    if show:
-        fig = plt.figure()
+    # if show:
+    #     fig = plt.figure()
     if full_region:
         start, end = 0, vol_image.shape[0]
     else:
@@ -935,6 +935,10 @@ def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
         if create_sub_dir:
             save_path = os.path.join(save_path, time.strftime("%Y%m%d%H%M%S"))
         os.makedirs(save_path, exist_ok=True)
+
+    # fig = plt.figure()
+    # fig, ax = plt.subplots()
+    # # im = None
 
     for i, (src, ma) in enumerate(zip(vol_image, mask_image)):
         if i % stride != 0:
@@ -960,15 +964,45 @@ def compare_image(vol_image, mask_image, thres=.5, pause_sec=0.01, stride=1,
             boundary = np.full([drawing.shape[0], bound_w, drawing.shape[2]], 255, dtype=drawing.dtype)
             drawing = np.concatenate([drawing_src, boundary, drawing], axis=1)
 
+        # 그래프를 업데이트하는 함수
+        # def update_image(data):
+        #     im.set_array(data)
+        #     plt.draw()
+        #     # plt.d
+            # plt.pause(0.1)  # 잠시 대기 (애니메이션 효과를 위한 시간 간격)
+
         if show:
+            # if im is None:
             plt.cla()
             plt.imshow(drawing)
             plt.pause(pause_sec)
+            # plt.show(block=False)
+            # time.sleep(0.5)
+            # fig
+            # ax.cla()
+            # fig.clear
+            # fig.clf()
+            # ax.cla()
+            # ax.clear()
+            # ax.imshow(drawing)
+            # fig.show()
+            # time.sleep(pause_sec)
+            # plt.pause(pause_sec)
+            # plt.show()
+            # plt.pause(pause_sec)
+            # time.sleep(pause_sec)
 
         if image_save:
             plt.imsave(os.path.join(save_path, '{:03d}.png'.format(i)), drawing)
-
+    # plt.show()
+    # plt.cla()
+    # plt.cla()
+    # ax.close()
     plt.close('all')
+    # plt.close(fig)
+    # plt.cla()
+    # plt.clf()
+    # plt.close()
 
 
 

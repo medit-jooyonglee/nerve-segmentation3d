@@ -1,4 +1,4 @@
-
+import shutil
 
 import pytest
 import os
@@ -48,7 +48,12 @@ def load_config(filename='3DUnet_multiclass/train_config.yaml'):
 def obb_nerve_model():
     # global model
     # global config
-
+    # import shutil
+    shutil.cop()
+    os.path.samefile()
+    os.path.relpath()
+    # shutil.copytree(dirs_exist_ok=)
+    # shutil.copy()
     app_base_path = '../'
     # FIXME: set the finale config in asset-path
 

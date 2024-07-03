@@ -37,7 +37,7 @@ def test_run_detection_model(model_detection):
 
 def test_run_segmentation_model(model_segmentation):
     shape = (128, ) * 3
-    inputs = torch.randn(1, 2, *shape).cuda()
+    inputs = torch.randn(1, 1, *shape).cuda()
     outputs = model_segmentation(inputs)
     assert outputs.shape[1] == 2
     assert outputs.shape[2:] == inputs.shape[2:]
@@ -48,7 +48,7 @@ if __name__ == '__main__':
         '-s',
         '--color=yes',
         '-rGA',
-        'test_model.py',
+        # 'test_model.py',
         # 'test_model.py::test_run_detection_model',
-        # 'test_model.py::test_run_segmentation_model',
+        'test_model.py::test_run_segmentation_model',
     ])

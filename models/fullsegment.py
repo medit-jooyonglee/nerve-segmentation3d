@@ -153,7 +153,8 @@ class ObbSegmentTorch(ObbSegmentBase):
                 cubes.append(cube)
 
             vtk_utils.split_show([rsz_volume, pred_msk, *cubes], [pred_msk, *cubes], show=False, image_save=True,
-                                 savename=self.debug_path + '_detection.png')
+                                 savename=self.debug_path + '_detection.png',
+                                 cam_direction=(-3, -3, -2))
 
         labels_text = {
             1: 'left',
@@ -169,12 +170,14 @@ class ObbSegmentTorch(ObbSegmentBase):
             coords = np.argwhere(pred_msk == i)
 
             logger.info(f'detecting obb segmentaion label :{labels_text.get(i)}')
-
+            # pool_seed = []
+            pool_seed = np.array([64, 32, 32])
+            # pool_seed = np.array([16, 16, 16])
             coords = coords if coords.size > 3 else np.stack(np.unravel_index([1, 2, 3], pred_msk.shape), axis=-1)
             coords_in_src = image_utils.apply_trasnform_np(coords, t_src)
 
             obb_voles, _, warp_points, t_obb2src = image_utils.volume_sampling_from_coords(
-                volume_list, coords_in_src, pool_seed=[16, 16, 16], scale=obb_scaling,
+                volume_list, coords_in_src, pool_seed=pool_seed, scale=obb_scaling,
                 augment_param={}, return_warp_points=True, return_transform=True)
 
             if not target_resize:
@@ -258,7 +261,7 @@ class ObbSegmentTorch(ObbSegmentBase):
                                                                                            method='nearest')
             i0, j0, k0 = valid_grids[:, 0], valid_grids[:, 1], valid_grids[:, 2]
 
-            label = 3 * i
+            label = i
             full_segment[i0, j0, k0] = valid_restred * (label)
 
         return full_segment

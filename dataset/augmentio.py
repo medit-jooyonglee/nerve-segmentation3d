@@ -183,7 +183,7 @@ class Augmentations:
             # spatial
             (1.0, tio.RandomAffine()),
             (1.0, tio.RandomElasticDeformation(max_displacement=4.5)),
-            # (4.0, tio.RandomFlip(axes=(1, 2), flip_probability=0.85)),
+            # (1.0, tio.RandomFlip(axes=(0, 1, 2), flip_probability=0.85)),
             (1.0, tio.RandomAnisotropy(downsampling=(1.5, 2.5))),
         ]
 
@@ -196,6 +196,10 @@ class Augmentations:
             (1.0, tio.RandomSpike(intensity=(2 / 255, 5 / 255))),
             (1.0, tio.RandomNoise(std=(0, 5 / 255))),
             (1.0, tio.RandomSwap(patch_size=10)),
+            (1.0, tio.RandomGamma((-1, 1))),
+            # tio.ZNormalization(),
+            # tio.HistogramStandardization()
+
         ]
 
         if custom_aug_nerve_seg:

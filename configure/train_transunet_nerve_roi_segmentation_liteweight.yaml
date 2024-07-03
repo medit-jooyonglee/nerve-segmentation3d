@@ -53,7 +53,7 @@ model:
     attention_dropout_rate: 0.0
     dropout_rate: 0.1
     mlp_dim: 512
-    num_heads: 8
+    num_heads: 5
     num_layers: 6
 
 # trainer configuration
