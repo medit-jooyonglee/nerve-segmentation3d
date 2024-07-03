@@ -156,7 +156,7 @@ class NerveMICCAISet(Dataset):
         self._num_save_image = 20
         self._data = dict()
         self.en_augmented = True
-        self.aug = Augmentations(False)
+        self.aug = Augmentations(False, en_flip=True)
 
         #  miccai 데이터가 source / gt 볼륨 크기가 달라서, 작은 gt쪽으로 맞추는데
         # 신경관은 gt쪽으로 굳이 맞출 필요는 없음

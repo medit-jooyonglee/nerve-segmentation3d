@@ -177,15 +177,20 @@ class BlurBlock(tio.SpatialTransform):
 
 
 class Augmentations:
-    def __init__(self, custom_aug_nerve_seg=False):
+    def __init__(self, custom_aug_nerve_seg=False, en_flip=False):
         # https://torchio.readthedocs.io/transforms/augmentation.html
         self._spatial_augments = [
             # spatial
             (1.0, tio.RandomAffine()),
             (1.0, tio.RandomElasticDeformation(max_displacement=4.5)),
-            # (1.0, tio.RandomFlip(axes=(0, 1, 2), flip_probability=0.85)),
             (1.0, tio.RandomAnisotropy(downsampling=(1.5, 2.5))),
         ]
+
+        if en_flip:
+            self._spatial_augments.append(
+                (3.0, tio.RandomFlip(axes=(0, 1, 2), flip_probability=0.85)),
+            )
+
 
         self._intensity_augments = [
             # intensity
