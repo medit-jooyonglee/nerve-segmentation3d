@@ -9,19 +9,28 @@ model:
   # used roi gt option
   used_roi_gt: false
   # determines the order of operators in a single layer (gcr - GroupNorm+Conv3d+ReLU)
-  layer_order: gcr
+#  layer_order: gcr
+  layer_order: cgr
   # number of features at each level of the U-Net
 #  f_maps: [ 32, 64, 128, 256 ]
   f_maps: [ 8, 16, 32, 64 ]
   # number of groups in the groupnorm
-  num_groups: 8
+  num_groups: 4
   # apply element-wise nn.Sigmoid after the final 1x1 convolution, otherwise apply nn.Softmax (in this case softmax)
   final_sigmoid:  true
   # if True applies the final normalization layer (sigmoid or softmax), otherwise the networks returns the output from the final convolution layer; use False for regression problems, e.g. de-noising
   is_segmentation: true
   parallel: false
+
   # if detection model is necessary. set yaml config file
 #  detection: 3DUnet_multiclass/train_nerve_roi_detection.yaml
+#  basic_module: SingleConv
+#  basic_module: DoubleConv
+  basic_module: ResNetBlock
+#  basic_module: ResNetBlockSE
+#  se_module: 'scse'
+#  se_module: 'cse'
+  se_module: 'sse'
 
 
 device: cuda:0

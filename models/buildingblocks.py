@@ -220,6 +220,8 @@ class ResNetBlockSE(ResNetBlock):
             self.se_module = ChannelSELayer3D(num_channels=out_channels, reduction_ratio=1)
         elif se_module == 'sse':
             self.se_module = SpatialSELayer3D(num_channels=out_channels)
+        else:
+            raise NotImplementedError(se_module)
 
     def forward(self, x):
         out = super().forward(x)

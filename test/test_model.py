@@ -49,6 +49,6 @@ if __name__ == '__main__':
         '--color=yes',
         '-rGA',
         # 'test_model.py',
-        # 'test_model.py::test_run_detection_model',
-        'test_model.py::test_run_segmentation_model',
+        'test_model.py::test_run_detection_model',
+        # 'test_model.py::test_run_segmentation_model',
     ])

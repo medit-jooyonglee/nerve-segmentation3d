@@ -6,7 +6,7 @@ import torch
 import torch.nn as nn
 
 import torch.nn.functional as F
-from .buildingblocks import DoubleConv, ResNetBlock, ResNetBlockSE, \
+from .buildingblocks import SingleConv, DoubleConv, ResNetBlock, ResNetBlockSE, \
     create_decoders, create_encoders
 from trainer.torch_utils import number_of_features_per_level, data_convert, to_numpy, get_class
 from trainer import get_model
@@ -47,9 +47,10 @@ class AbstractUNet(nn.Module):
 
     def __init__(self, in_channels, out_channels, final_sigmoid, basic_module, f_maps=64, layer_order='gcr',
                  num_groups=8, num_levels=4, is_segmentation=True, conv_kernel_size=3, pool_kernel_size=2,
-                 conv_padding=1, is3d=True):
+                 conv_padding=1, is3d=True, **kwargs):
         super(AbstractUNet, self).__init__()
-
+        if isinstance(basic_module, str):
+            basic_module = get_class(basic_module, ['models.model'])
         if isinstance(f_maps, int):
             f_maps = number_of_features_per_level(f_maps, num_levels=num_levels)
 
@@ -60,11 +61,11 @@ class AbstractUNet(nn.Module):
 
         # create encoder path
         self.encoders = create_encoders(in_channels, f_maps, basic_module, conv_kernel_size, conv_padding, layer_order,
-                                        num_groups, pool_kernel_size, is3d)
+                                        num_groups, pool_kernel_size, is3d, **kwargs)
 
         # create decoder path
         self.decoders = create_decoders(f_maps, basic_module, conv_kernel_size, conv_padding, layer_order, num_groups,
-                                        is3d)
+                                        is3d, **kwargs)
 
         # in the last layer a 1×1 convolution reduces the number of output channels to the number of labels
         if is3d:
@@ -126,14 +127,14 @@ class UNet3D(AbstractUNet):
         super(UNet3D, self).__init__(in_channels=in_channels,
                                      out_channels=out_channels,
                                      final_sigmoid=final_sigmoid,
-                                     basic_module=DoubleConv,
+                                     basic_module=kwargs.pop('basic_module', 'DoubleConv'),
                                      f_maps=f_maps,
                                      layer_order=layer_order,
                                      num_groups=num_groups,
                                      num_levels=num_levels,
                                      is_segmentation=is_segmentation,
                                      conv_padding=conv_padding,
-                                     is3d=True)
+                                     is3d=True, **kwargs)
 
 class Unet3DClassify(UNet3D):
     def __init__(self, *args, **kwargs):

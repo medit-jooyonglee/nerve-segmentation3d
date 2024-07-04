@@ -29,9 +29,12 @@ def inference_model():
     # segment_config = 'configure/roi_segmentation_miccai.yaml'
 
     # old version. LAI option
-    detect_config = 'configure/nerve_roi_detection_oldver.yaml'
+    detect_config = 'configure/test_nerve_roi_detection_oldver.yaml'
     segment_config = 'configure/roi_segmentation_oldver.yaml'
 
+    # test
+    # detect_config = 'configure/roi_detection_aihub.yaml'
+    # segment_config = 'configure/roi_segmentation_aihub.yaml'
 
     # config_file = '3DUnet_multiclass/train_transunet_nerve_roi_segmentation_liteweight.yaml'
     # test_mode = 'teethnet'
@@ -47,25 +50,46 @@ def test_full_model_input_volume(inference_model):
 
 
 def test_visualize_full_model_read_miccai_dataset(inference_model):
+    # miccai data : rpi
     pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/imagesTr'
     found = diskmanager.deep_serach_files(pathname, ['.mha'])
     assert len(found) > 0, f'empty foound: {pathname}'
     found = found[::-1]
+    # miccai RPI
+    # RPI
+    # used_volume_direction = 'rai'
+    used_volume_direction = 'lai'
+    save_path = 'd:/temp/nerve/ai_hub_result'
+    inference_model.debug = True
     # vtk  lai, itk - lps
     for filename in found:
-        vol, info = read_image_volume(filename)
+        # dirname = os.path.dirname(filename)
+        name = '_'.join(diskmanager.split_dir_paths(filename)[-4:])
+        inference_model.debug_path = os.path.join(save_path, name)
+        # os.path.dirname
+        src_vol, info = read_image_volume(filename)
+
+        if used_volume_direction == 'lps':
+            vol = src_vol[::-1, :, ::-1].copy()
+        elif used_volume_direction == 'lai':
+            vol = src_vol[:, ::-1, ::-1].copy()
+        elif used_volume_direction == 'rap':
+            pass
+            # raise NotImplementedError
+        else:
+            pass
 
         # input_volume_direction = {
         #
         # }
         spacing = info.GetSpacing()
-        pred_mask = inference_model.ful_segment(vol, spacing)
+        pred_mask = inference_model.full_segment(vol, spacing)
 
         res_vtk = volume_mask_coloring(pred_mask)
         #                                            color=colors[(i + 1) * 3]) for i, v in enumerate(nonzers)]
         # res_vtk = vtk_utils.numpyvolume2vtkvolume(res, color=(1, 1, 0))
         vol_vtk = vtk_utils.volume_coloring(vol)
-        vtk_utils.split_show([vol_vtk], [vol_vtk, res_vtk])
+        vtk_utils.split_show([vol_vtk], [vol_vtk, res_vtk, vtk_utils.get_axes(100)])
 
 
 def volume_mask_coloring(mask):
@@ -84,22 +108,32 @@ def test_visualize_fullsegment_predict(inference_model):
     found = diskmanager.deep_search_directory(test_ct_basename, exts=['.dcm'], filter_func=lambda x: len(x) > 0)
     print(f'found {len(found)}')
     assert len(found) > 0, f'empty foound: {test_ct_basename}'
-    # used_volume_direction = 'lps'
-    used_volume_direction = 'rai'
-
+    used_volume_direction = 'lai'
+    # used_volume_direction = 'rai'
+    inference_model.debug = True
+    save_path = 'd:/temp/nerve/old_detect_new_seg'
     for file in found:
+        name = '_'.join(diskmanager.split_dir_paths(file)[-4:])
+        inference_model.debug_path = os.path.join(save_path, name) #'d:/temp/nerve/ai_hub_result'
 
-        vol, spacing, window = read_sitk_volume(file)
+        src_vol, spacing, window = read_sitk_volume(file)
 
-        if used_volume_direction == 'rai':
+        if used_volume_direction == 'lai':
             # z, y, inversion
-            vol = vol[::-1, ::-1]
+            vol = src_vol[::-1, ::-1]
         elif used_volume_direction == 'rpi':
             # miccai dataset
-            vol = vol[::-1, :,::-1]
+            vol = src_vol[::-1, :, ::-1]
             pass
 
-        pred_mask = inference_model.full_segment(vol, spacing)
+        else:
+            vol = src_vol
+
+        try:
+            pred_mask = inference_model.full_segment(vol, spacing)
+        except Exception as e:
+            print(e.args)
+            continue
         mask_vtk = volume_mask_coloring(pred_mask)
 
         vol_vtk = vtk_utils.volume_coloring(vol)
@@ -183,8 +217,8 @@ if __name__ == '__main__':
                  '--color=yes',
                  '-rGA',
                  # __file__ + '::test_full_model_input_volume',
-                 # __file__ + '::test_visualize_full_model_read_miccai_dataset',
+                 __file__ + '::test_visualize_full_model_read_miccai_dataset',
                  # __file__ + '::test_visualize_full_model_read_miccai_dataset_with_gt',
-                 __file__ + '::test_visualize_fullsegment_predict',
+                 # __file__ + '::test_visualize_fullsegment_predict',
                  ])
     # vtk_utils.show([pred])

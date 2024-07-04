@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 from scipy.spatial.transform import Rotation
 from tools import vtk_utils
 
+from trainer import get_logger
 
 def to_right_hand_rules(basis):
     """
@@ -48,9 +49,10 @@ def refinement_basis(basis):
 
 class Obb:
     def __init__(self):
-        self.center = np.array([])
-        self.fsize = np.array([])
-        self.theta = np.array([])
+        dtype = np.float32
+        self.center = np.zeros([3], dtype=dtype)
+        self.fsize = np.ones([3], dtype=dtype)
+        self.theta = np.zeros([3], dtype=dtype)
 
         self.order = 'zyx'
         self.angle_dtype = 'radian'
@@ -104,6 +106,11 @@ class Obb:
         -------
 
         """
+
+        logger = get_logger()
+        if in_pose.shape[0] < 3:
+            logger.error('cannot create obb. too smal points')
+            return
         assert in_pose.shape[0] >= 3, 'we needs 3d points at least 3'
         assert order in ['xyz', 'zyx']
         pose = in_pose if order == 'zyx' else in_pose[:, ::-1]
