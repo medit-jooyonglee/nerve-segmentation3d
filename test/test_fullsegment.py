@@ -25,11 +25,11 @@ def init_inference_model(detect_config, segment_config):
 @pytest.fixture(scope='session')
 def inference_model():
     # old version LPS option
-    # detect_config = 'configure/roi_detection_miccai.yaml'
+    detect_config = 'configure/roi_detection_miccai.yaml'
     # segment_config = 'configure/roi_segmentation_miccai.yaml'
 
     # old version. LAI option
-    detect_config = 'configure/test_nerve_roi_detection_oldver.yaml'
+    # detect_config = 'configure/test_nerve_roi_detection_oldver.yaml'
     segment_config = 'configure/roi_segmentation_oldver.yaml'
 
     # test
@@ -197,7 +197,48 @@ def test_visualize_full_model_read_miccai_dataset_with_gt(inference_model):
         vtk_utils.split_show([vol_vtk], [vol_vtk, mask_vtk], [vol_vtk, gt_vtk])
 
 
+def test_roi_detect(inference_model):
+    pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/imagesTr'
+    gt_pathname = 'D:/dataset/miccai/Dataset112_ToothFairy2/labelsTr'
+    found = diskmanager.deep_serach_files(pathname, ['.mha'])
+    gt_found = diskmanager.deep_serach_files(gt_pathname, ['.mha'])
+    assert len(found) > 0, f'empty foound: {pathname}'
+    assert len(found) > 0, f'empty foound: {pathname}'
+    found = found[::-1]
+    gt_found = gt_found[::-1]
+    def split_id(filename, i): return int(filename.split('_')[-i])
 
+    mapper = np.zeros([100], dtype=np.uint8)
+    mapper[np.array([3, 4])] = np.array([1, 2])
+
+    save_path = 'd:/temp/nerve'
+
+    for filename, gt_filename in zip(found, gt_found):
+        subpath = os.path.basename(filename)
+        save_pathname = os.path.join(save_path, subpath)
+        inference_model.debug = False
+        inference_model.debug_path = save_pathname
+
+        src_vol, info = read_image_volume(filename)
+        gt_mask, _ = read_image_volume(gt_filename, normalize=False)
+        gt_mask = mapper[gt_mask]
+        spacing = info.GetSpacing()
+
+        # res = inference_model.detection_roi(src_vol[::-1, ::-1], spacing)
+        # res = inference_model.detection_roi(src_vol[:, ::-1, ::-1].copy(), spacing)
+        res = inference_model.detection_roi(src_vol, spacing)
+        vtk_utils.show([np.argmax(res, axis=0)])
+
+    # def full_segment(self, full_volume:np.ndarray, spacing, obb_scaling=1.0, target_resize=True) -> np.ndarray:
+    #     if self.debug:
+    #         self.debug_items.clear()
+    #
+    #     visualize = self.visualize
+    #     target_shape = self.target_shape
+    #
+    #     rsz_vol, t_src = image_utils.auto_cropping_keep_ratio(full_volume, [128, ] * 3, return_transform=True)
+    #     obb_volume = self.detection_roi(rsz_vol, return_numpy=True)
+    #
 def dsc(pred, tar, num_ch):
     smooth = 1e-5
     values = []
@@ -217,8 +258,9 @@ if __name__ == '__main__':
                  '--color=yes',
                  '-rGA',
                  # __file__ + '::test_full_model_input_volume',
-                 __file__ + '::test_visualize_full_model_read_miccai_dataset',
+                 # __file__ + '::test_visualize_full_model_read_miccai_dataset',
                  # __file__ + '::test_visualize_full_model_read_miccai_dataset_with_gt',
                  # __file__ + '::test_visualize_fullsegment_predict',
+                 __file__ + '::test_roi_detect'
                  ])
     # vtk_utils.show([pred])

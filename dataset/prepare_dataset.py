@@ -9,7 +9,7 @@ from trainer import get_logger
 from trainer import image_utils
 from trainer import utils
 from tools import utils_numpy
-
+from tools.simpleitk_utils import read_sitk_volume
 from tools import dicom_read_wrapper, vtk_utils
 
 get_runtime_logger = get_logger
@@ -169,7 +169,8 @@ def convert_main(souce_path, label_path, save_path, label_ext='.json', vtk_order
         label_src_volume = recon_volume2(coords, source_shape)
         label_resize_volume = image_utils.auto_cropping_keep_ratio(label_src_volume, target_shape=target_shape, method='nearest')
 
-        norm_src_volume, spacing = dicom_read_wrapper.read_dicom_wrapper(dicom_path, vtkorder=vtk_order, normalize=True)
+        norm_src_volume, spacing, _ = read_sitk_volume(dicom_path)
+        # norm_src_volume, spacing = dicom_read_wrapper.read_dicom_wrapper(dicom_path, vtkorder=vtk_order, normalize=True)
         resize_spacing = np.asarray(spacing) / scale
         rsz_volume = image_utils.auto_cropping_keep_ratio(norm_src_volume, target_shape=target_shape)
 
@@ -276,10 +277,10 @@ if __name__ == '__main__':
     # pytest.main()
     # import pdb; pdb.set_trace()
     # pytest.main()
-    # main([
-    #     '--source=D:/dataset/ai_hub_labels/CTDATA',
-    #     '--gt=D:/dataset/ai_hub_labels/CTDATA',
-    #     '--savedir=d:/temp/make_not_vtk',
-    # ])
+    main([
+        '--source=D:/dataset/ai_hub_labels/CTDATA',
+        '--gt=D:/dataset/ai_hub_labels/CTDATA',
+        '--savedir=d:/temp/make_not_vtk',
+    ])
 
-    display_2d_image()
+    # display_2d_image()

@@ -266,7 +266,7 @@ class ObbSegmentTorch(ObbSegmentBase):
 
         return full_segment
 
-    def detection_roi(self, volume:np.ndarray, return_numpy=False) -> np.ndarray:
+    def _detection_roi(self, volume:np.ndarray, return_numpy=False) -> np.ndarray:
         if volume.ndim == 3:
             volume = volume[None]
         device = next(self.det_model.parameters()).device
@@ -278,6 +278,12 @@ class ObbSegmentTorch(ObbSegmentBase):
         roi_pred = torch_utils.to_numpy(roi_pred) if return_numpy else roi_pred
         return roi_pred
 
+    def detection_roi(self, full_volume:np.ndarray, spacing, obb_scaling=1.0):
+
+        rsz_vol, t_src = image_utils.auto_cropping_keep_ratio(full_volume, [128, ] * 3, return_transform=True)
+        obb_volume = self._detection_roi(rsz_vol, return_numpy=True)
+        return obb_volume
+
     @timefn2
     def full_segment(self, full_volume:np.ndarray, spacing, obb_scaling=1.0, target_resize=True) -> np.ndarray:
         if self.debug:
@@ -287,7 +293,7 @@ class ObbSegmentTorch(ObbSegmentBase):
         target_shape = self.target_shape
 
         rsz_vol, t_src = image_utils.auto_cropping_keep_ratio(full_volume, [128, ] * 3, return_transform=True)
-        obb_volume = self.detection_roi(rsz_vol, return_numpy=True)
+        obb_volume = self._detection_roi(rsz_vol, return_numpy=True)
 
         full_seg = self.obb_vol_segment(full_volume, rsz_vol, obb_volume, t_src, target_shape, obb_scaling, target_resize=target_resize)
 
