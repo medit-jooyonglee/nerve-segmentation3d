@@ -14,3 +14,7 @@ pydicom
 pylibjpeg
 pylibjpeg-libjpeg
 ml_collections
+torchio
+panimg
+mlflow
+vtk
