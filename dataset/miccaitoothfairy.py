@@ -151,8 +151,8 @@ class NerveMICCAISet(Dataset):
             logger.error('cannot find the source label info. call method "data_split_path(...)"')
 
         self.name = kwargs.get('name', '')
-        self._num_reuse_image = 10
-
+        self._num_save_image_const = 10
+        self._num_reuse_image = self._num_save_image_const
         self._num_save_image = 20
         self._data = dict()
         self.en_augmented = True
@@ -165,6 +165,10 @@ class NerveMICCAISet(Dataset):
         # self._temp_data =
     def __len__(self):
         return len(self.sources) * self._num_reuse_image
+
+    def train(self, state):
+        self.en_augmented = state
+        self._num_reuse_image = self._num_save_image_const if state else 1
 
     def index2real(self, val):
         # 0, 0, 0..., 0), ()1, 1, 1, 1...1)
@@ -189,6 +193,14 @@ class NerveMICCAISet(Dataset):
             src, gt = self.sources[real_index], self.labels[real_index]
             src_image, src_ref = read_image_volume(src)
             gt_image, label_ref = read_image_volume(gt, normalize=False)
+            # padding image as volume
+            remain = np.max(src_image.shape) - src_image.shape[0]
+            padding_src_image = np.random.choice([True, False])
+            # padding src image
+            if padding_src_image:
+                print(padding_src_image)
+                src_image = np.concatenate([src_image[:remain][::-1], src_image], axis=0)
+
             mapper = np.zeros([100], dtype=np.uint8)
             # (3, 4) ->(1, 2)
             mapper[np.array([3, 4])] = np.array([1, 2])

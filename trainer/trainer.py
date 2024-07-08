@@ -105,7 +105,11 @@ def create_trainer(config, package=__file__):
 
     device_str = config.get('device', 'cuda:0')
     device = torch.device(device_str)
-    torch.cuda.set_device(device)
+    if device.index >= torch.cuda.device_count():
+        logger.error(f'invalid devices. {device}')
+        torch.cuda.set_device(torch.device('cuda:0'))
+    else:
+        torch.cuda.set_device(device)
     # if device_str.startswith('cuda'):
     # deivice = torch.device
     if torch.cuda.device_count() > 1 and not device_str == 'cpu' and config['model'].get('parallel'):
@@ -517,7 +521,7 @@ class Trainer:
         val_losses = utils.RunningAverage('loss')
         val_scores = utils.RunningAverage('eval_scores')
         # from tools import vtk_utils
-        # self.loaders['valid'].dataset.train(False)
+        self.loaders['valid'].dataset.train(False)
         with torch.no_grad():
             # for i in range(len(self.loaders['valid'].dataset)):
 

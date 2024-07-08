@@ -4,6 +4,7 @@ import pytest
 import vtk_utils
 import json
 
+# from torch.nn.
 from trainer import diskmanager, get_logger
 from trainer import get_logger
 from trainer import image_utils

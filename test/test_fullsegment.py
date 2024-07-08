@@ -25,7 +25,9 @@ def init_inference_model(detect_config, segment_config):
 @pytest.fixture(scope='session')
 def inference_model():
     # old version LPS option
-    detect_config = 'configure/roi_detection_miccai.yaml'
+    # detect_config = 'configure/roi_detection_miccai.yaml'
+    detect_config = 'trainer/CHECKPOINT_DIR/roi_detection_miccai_gcr_resnetblock_sse/config/config_20240704074329.yaml'
+
     # segment_config = 'configure/roi_segmentation_miccai.yaml'
 
     # old version. LAI option
@@ -216,7 +218,7 @@ def test_roi_detect(inference_model):
     for filename, gt_filename in zip(found, gt_found):
         subpath = os.path.basename(filename)
         save_pathname = os.path.join(save_path, subpath)
-        inference_model.debug = False
+        inference_model.debug = True
         inference_model.debug_path = save_pathname
 
         src_vol, info = read_image_volume(filename)
@@ -227,7 +229,7 @@ def test_roi_detect(inference_model):
         # res = inference_model.detection_roi(src_vol[::-1, ::-1], spacing)
         # res = inference_model.detection_roi(src_vol[:, ::-1, ::-1].copy(), spacing)
         res = inference_model.detection_roi(src_vol, spacing)
-        vtk_utils.show([np.argmax(res, axis=0)])
+        # vtk_utils.show([np.argmax(res, axis=0)])
 
     # def full_segment(self, full_volume:np.ndarray, spacing, obb_scaling=1.0, target_resize=True) -> np.ndarray:
     #     if self.debug:
@@ -260,7 +262,7 @@ if __name__ == '__main__':
                  # __file__ + '::test_full_model_input_volume',
                  # __file__ + '::test_visualize_full_model_read_miccai_dataset',
                  # __file__ + '::test_visualize_full_model_read_miccai_dataset_with_gt',
-                 # __file__ + '::test_visualize_fullsegment_predict',
-                 __file__ + '::test_roi_detect'
+                 __file__ + '::test_visualize_fullsegment_predict',
+                 # __file__ + '::test_roi_detect'
                  ])
     # vtk_utils.show([pred])
