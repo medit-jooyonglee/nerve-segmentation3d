@@ -1,0 +1,152 @@
+model:
+  # model class, e.g. UNet3D, ResidualUNet3D
+  name: UNet3D
+#  name: ResidualUNet3D
+  # number of input channels to the model
+  in_channels: 1
+  # number of classes
+  out_channels: 3
+  # used roi gt option
+  used_roi_gt: false
+  # determines the order of operators in a single layer (gcr - GroupNorm+Conv3d+ReLU)
+  layer_order: cgr
+  # number of features at each level of the U-Net
+#  f_maps: [ 32, 64, 128, 256 ]
+  f_maps: [ 8, 16, 32, 64 ]
+  # number of groups in the groupnorm
+  num_groups: 8
+  # apply element-wise nn.Sigmoid after the final 1x1 convolution, otherwise apply nn.Softmax (in this case softmax)
+  final_sigmoid:  true
+  # if True applies the final normalization layer (sigmoid or softmax), otherwise the networks returns the output from the final convolution layer; use False for regression problems, e.g. de-noising
+  is_segmentation: true
+  parallel: false
+  # if detection model is necessary. set yaml config file
+#  detection: 3DUnet_multiclass/train_nerve_roi_detection.yaml
+
+
+device: cuda:6
+# trainer configuration
+trainer:
+  # path to the checkpoint directory
+  checkpoint_dir: CHECKPOINT_DIR/roi_detection_miccai_cgr_doubleconv
+  # path to the latest checkpoint; if provided the training will be resumed from that checkpoint, if bool type, find best checkpoints in checkpoint_dir
+  resume: true
+  # path to the best_checkpoint.pytorch; to be used for fine-tuning the model with additional ground truth
+  # make sure to decrease the learning rate in the optimizer config accordingly
+  pre_trained: null
+  # how many iterations between validations
+  validate_after_iters: 1000
+  # how many iterations between tensorboard logging
+  log_after_iters: 500
+  # max number of epochs
+  max_num_epochs: 200
+  # max number of iterations
+  max_num_iterations: 500000
+  # model with higher eval score is considered better
+  eval_score_higher_is_better: True
+
+  skip_train_validation: True
+
+  k_fold_cross_validation: true
+  experiment_name: cbct_ian_detection
+  run_name: roi_detection_miccai_cgr_doubleconv
+  mlflow_path: http://10.100.1.45:5000
+
+# loss function configuration
+loss:
+  # use BCE loss for training
+#  name: BCEDiceLossMyBalance
+  name: BCEDiceLoss
+#  name: BCEDiceLossMyBalance
+# optimizer configuration
+optimizer:
+  # initial learning rate
+  learning_rate: 0.0002
+  # weight decay
+  weight_decay: 0.00001
+# evaluation metric
+eval_metric:
+  # use average precision metric
+  name: MeanIoU
+  # multiple option
+  multiple : true
+  # if multiple metric, defined names
+  names : [DSC, PPV, SEN]
+# learning rate scheduler configuration
+lr_scheduler:
+  # reduce learning rate when evaluation metric plateaus
+  name: ReduceLROnPlateau
+  # use 'max' if eval_score_higher_is_better=True, 'min' otherwise
+  mode: max
+  # factor by which learning rate will be reduced
+  factor: 0.2
+  # number of *validation runs* with no improvement after which learning rate will be reduced
+  patience: 8
+
+# data loaders configuration
+loaders:
+  # class of the HDF5 dataset, currently StandardHDF5Dataset and LazyHDF5Dataset are supported.
+  # When using LazyHDF5Dataset make sure to set `num_workers = 1`, due to a bug in h5py which corrupts the data
+  # when reading from multiple threads.
+  dataset: NerveMICCAISet
+
+  k_fold: 6
+  # batch dimension; if number of GPUs is N > 1, then a batch_size of N * batch_size will automatically be taken for DataParallel
+  batch_size: 1
+  # how many subprocesses to use for data loading
+  num_workers: 1
+  # path to the raw data within the H5
+  raw_internal_path: raw
+  # path to the label data within the H5
+  label_internal_path: label
+  # path to the pixel-wise weight map withing the H5 if present
+  weight_internal_path: null
+  # configuration of the train loader
+  train:
+    # paths to the training datasets
+    file_paths:
+      [
+        [
+          './dataset/data_split_miccai.json',
+          'train',
+        ],
+      ]
+  valid:
+    # paths to the training datasets
+    file_paths:
+      [
+        [
+          './dataset/data_split_miccai.json',
+          'valid',
+        ],
+      ]
+
+
+  # configuration of the val loader
+#  val:
+#    # paths to the val datasets
+#    file_paths:
+#      - C:/dataset/nerve_dataset
+#
+#    # SliceBuilder configuration, i.e. how to iterate over the input volume patch-by-patch
+#    slice_builder:
+#      name: FilterSliceBuilder
+#      # train patch size given to the network (adapt to fit in your GPU mem, generally the bigger patch the better)
+#      patch_shape: [ 80, 170, 170 ]
+#      # train stride between patches
+#      stride_shape: [ 80, 170, 170 ]
+#      # minimum volume of the labels in the patch
+#      threshold: 0.01
+#      # probability of accepting patches which do not fulfil the threshold criterion
+#      slack_acceptance: 0.01
+#
+#    # data augmentation
+#    transformer:
+#      raw:
+#        - name: Standardize
+#        - name: ToTensor
+#          expand_dims: true
+#      label:
+#        - name: ToTensor
+#          expand_dims: false
+#          dtype: long
